@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^5.0.1",
+    "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
     "react-toolbox": "^2.0.0-beta.12",
-    "react-toolbox-themr": "^1.0.2"
+    "react-toolbox-themr": "^1.0.2",
+    "soundcloud": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,15 +22,15 @@
   },
   "reactToolbox": {
     "include": [
-        "BUTTON",
-        "DATE_PICKER"
+      "BUTTON",
+      "DATE_PICKER"
     ],
     "customProperties": {
-        "animation-duration": "0.3s",
-        "color-accent": "var(--palette-pink-a200)",
-        "color-accent-dark": "var(--palette-pink-700)",
-        "color-primary-contrast": "var(--color-dark-contrast)",
-        "color-accent-contrast": "var(--color-dark-contrast)"
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
     },
     "output": "src/assets/react-toolbox"
   }
