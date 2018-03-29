@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './assets/react-toolbox/theme.css';
+import 'material-design-icons/iconfont/material-icons.css';
 import theme from './assets/react-toolbox/theme.js';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import SC from 'soundcloud';
+import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 
 import TrackList from './TrackList';
 import scButton from './assets/btn-connect-sc-l.png';
@@ -54,14 +56,16 @@ class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <div className="App">
-          <header className="App-header">
+        {/* <div className="App"> */}
+        <div>
+          <AppBar title="TrackFilter" leftIcon="menu" />
+          {/* <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
+            <h1 className="App-title">Welcome to TrackFilter</h1>
+          </header> */}
+          {/* <p className="App-intro">
             To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
+          </p> */}
           {content}
         </div>
       </ThemeProvider>
