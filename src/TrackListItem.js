@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import axios from 'axios';
 
 class TrackListItem extends Component {
@@ -24,7 +25,7 @@ class TrackListItem extends Component {
           url: url,
           format: 'json',
           maxheight: '166',
-          maxwidth: '600'
+          maxwidth: '800'
         }
       }).then( response => {
         this.setState({iframe: response.data, loaded: true});
@@ -34,9 +35,13 @@ class TrackListItem extends Component {
 
   render () {
     if (this.state.loaded) {
-      return (<div dangerouslySetInnerHTML={{__html: this.state.iframe.html}}></div>)
+      return (<div dangerouslySetInnerHTML={{__html: this.state.iframe.html}} style={{marginBottom: '1em'}}></div>)
     } else {
-      return (<div style={{clear: 'both', height: '200px'}}>Loading ...</div>)
+      return (
+        <div style={{clear: 'both', height: '200px'}}>
+          <ProgressBar type="circular" mode="indeterminate" />
+        </div>
+      )
     }
   }
 }

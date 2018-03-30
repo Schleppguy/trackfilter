@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './assets/react-toolbox/theme.css';
 import 'material-design-icons/iconfont/material-icons.css';
 import theme from './assets/react-toolbox/theme.js';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import SC from 'soundcloud';
+
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
+import Panel from 'react-toolbox/lib/layout/Panel';
+import Layout from 'react-toolbox/lib/layout/Layout';
+import Drawer from 'react-toolbox/lib/drawer/Drawer';
 
 import TrackList from './TrackList';
 import scButton from './assets/btn-connect-sc-l.png';
@@ -56,18 +59,19 @@ class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        {/* <div className="App"> */}
-        <div>
-          <AppBar title="TrackFilter" leftIcon="menu" />
-          {/* <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to TrackFilter</h1>
-          </header> */}
-          {/* <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p> */}
-          {content}
-        </div>
+        <Layout>
+          <Panel bodyScroll={ true }>
+            <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat/>
+            <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em'}}>
+              {content}
+            </div>
+          </Panel>
+          <Drawer active={ true } type={ 'right' } withOverlay={ false } insideTree={ true }>
+            <div style={{marginTop: '5em'}}>
+              Filters
+            </div>
+          </Drawer>
+        </Layout>
       </ThemeProvider>
     );
   }

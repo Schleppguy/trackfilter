@@ -21,7 +21,6 @@ class TrackList extends Component {
   }
 
   render() {
-    const loader = <div style={{clear: 'both', height: '200px'}}>Loading ...</div>;
 
     let items = this.state.tracks.map((track, i) => {
       return <TrackListItem track={track} key={i} />
@@ -29,14 +28,13 @@ class TrackList extends Component {
 
     return (
         <InfiniteScroll
-            pageStart={0}
-            loadMore={this.loadItems}
-            hasMore={this.state.hasMoreItems}
-            loader={loader}>
-
-            <div className="tracks">
-                {items}
-            </div>
+          pageStart={0}
+          loadMore={this.loadItems}
+          hasMore={this.state.hasMoreItems}
+        >
+          <div className="tracks">
+              {items}
+          </div>
         </InfiniteScroll>
     );
   }
