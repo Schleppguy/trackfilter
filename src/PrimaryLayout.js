@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import './assets/react-toolbox/theme.css';
-import 'material-design-icons/iconfont/material-icons.css';
-import theme from './assets/react-toolbox/theme.js';
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import SC from 'soundcloud';
 import _ from 'lodash';
 
@@ -75,25 +71,23 @@ class PrimaryLayout extends Component {
     }
 
     return (
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Panel bodyScroll={ true }>
-            <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat/>
-            <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em'}}>
-              {content}
-            </div>
-          </Panel>
-          <Drawer active={ true } type={ 'right' } withOverlay={ false } insideTree={ true }>
-            <div style={{marginTop: '5em'}}>
-              <Filters 
-                followings={this.state.followings}
-                updateFilteredTracks={this.updateFilteredTracks}
-                tracks={this.state.tracks}
-              />
-            </div>
-          </Drawer>
-        </Layout>
-      </ThemeProvider>
+      <Layout>
+        <Panel bodyScroll={ true }>
+          <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat/>
+          <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em'}}>
+            {content}
+          </div>
+        </Panel>
+        <Drawer active={ true } type={ 'right' } withOverlay={ false } insideTree={ true }>
+          <div style={{marginTop: '5em'}}>
+            <Filters 
+              followings={this.state.followings}
+              updateFilteredTracks={this.updateFilteredTracks}
+              tracks={this.state.tracks}
+            />
+          </div>
+        </Drawer>
+      </Layout>
     );
   }
 }
