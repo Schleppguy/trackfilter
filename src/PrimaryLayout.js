@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SC from 'soundcloud';
+import { getTracks, getFollowings } from './scFetch';
 import _ from 'lodash';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
@@ -10,11 +10,6 @@ import Drawer from 'react-toolbox/lib/drawer/Drawer';
 import TrackList from './TrackList';
 import Filters from './Filters';
 import scButton from './assets/btn-connect-sc-l.png';
-
-SC.initialize({
-  client_id: process.env.REACT_APP_SC_CLIENT_ID,
-  redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-});
 
 class PrimaryLayout extends Component {
   constructor(props) {
@@ -33,28 +28,17 @@ class PrimaryLayout extends Component {
   }
 
   handleSCClick() {
-    if (process.env.REACT_APP_ENV === 'development') {
-      SC.get('/users/7742327/favorites')
+      getTracks()
       .then(tracks => {
         this.setState({ tracks, filteredTracks: tracks });
-      });
+      })
+      .catch(err => console.error(err));
 
-      SC.get('/users/7742327/followings', {limit: 500})
+      getFollowings('7742327')
       .then(followings => {
         this.setState({ followings: _.sortBy(followings.collection, ['username']) });
-      });
-    } else {
-      SC.connect().then(() => {      
-        return SC.get('/me/activities/tracks/affiliated', {limit: 500, streamable: true});
-      }).then(tracks => {
-        const collection = tracks.collection.filter(t => t.type === 'track')
-        this.setState({tracks: collection, filteredTracks: collection})
-      }).then(() => {
-        return SC.get('/me/followings', {limit: 500});
-      }).then(followings => {
-        this.setState({ followings: _.sortBy(followings.collection, ['username']) });
-      });
-    }
+      })
+      .catch(err => console.error(err));
   }
   render() {
     let content;
