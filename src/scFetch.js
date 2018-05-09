@@ -1,7 +1,7 @@
 import SC from 'soundcloud';
 import _ from 'lodash';
 
-const DEFAULT_USER_ID = '7742327'
+const DEFAULT_USER_ID = '7742327';
 
 SC.initialize({
   client_id: process.env.REACT_APP_SC_CLIENT_ID,
@@ -23,11 +23,6 @@ export const getTracks = () => {
         return collection
       })
       .catch(err => { throw new Error(`scFetch getTracks: ${err.message}`) });
-      // }).then(() => {
-      //   return SC.get('/me/followings', {limit: 500});
-      // }).then(followings => {
-      //   this.setState({ followings: _.sortBy(followings.collection, ['username']) });
-      // });
   }
 };
 
