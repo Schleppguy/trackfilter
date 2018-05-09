@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { getTracks, getFollowings } from './scFetch';
-import _ from 'lodash';
+import { getTracks, getMyFollowings } from './scFetch';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Panel from 'react-toolbox/lib/layout/Panel';
@@ -34,12 +33,13 @@ class PrimaryLayout extends Component {
       })
       .catch(err => console.error(err));
 
-      getFollowings('7742327')
+      getMyFollowings()
       .then(followings => {
-        this.setState({ followings: _.sortBy(followings.collection, ['username']) });
+        this.setState({ followings });
       })
       .catch(err => console.error(err));
   }
+  
   render() {
     let content;
     if (this.state.tracks.length > 0) {
