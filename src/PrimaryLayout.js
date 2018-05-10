@@ -17,54 +17,60 @@ class PrimaryLayout extends Component {
       tracks: [],
       followings: [],
       filteredTracks: []
-    }
+    };
     this.handleSCClick = this.handleSCClick.bind(this);
     this.updateFilteredTracks = this.updateFilteredTracks.bind(this);
   }
 
   updateFilteredTracks(tracks) {
-    this.setState({ tracks })
+    this.setState({ tracks });
   }
 
   handleSCClick() {
-      getTracks()
-      .then(tracks => {
-        this.setState({ tracks, filteredTracks: tracks });
-      })
-      .catch(err => console.error(err));
+    getTracks().then(tracks => {
+      this.setState({ tracks, filteredTracks: tracks });
+    });
 
-      getMyFollowings()
-      .then(followings => {
-        this.setState({ followings });
-      })
-      .catch(err => console.error(err));
+    getMyFollowings().then(followings => {
+      this.setState({ followings });
+    });
   }
-  
+
   render() {
     let content;
     if (this.state.tracks.length > 0) {
-      content = <TrackList tracks={this.state.filteredTracks} />
+      content = <TrackList tracks={this.state.filteredTracks} />;
     } else {
-      content = <button onClick={this.handleSCClick} style={{border: 'none', backgroundColor: 'white'}}>
-        <img
-          src={scButton}
-          className="sc-button"
-          alt="Connect with SoundCloud"
-        />
-      </button>
+      content = (
+        <button
+          onClick={this.handleSCClick}
+          style={{ border: 'none', backgroundColor: 'white' }}
+        >
+          <img
+            src={scButton}
+            className="sc-button"
+            alt="Connect with SoundCloud"
+          />
+        </button>
+      );
     }
 
     return (
       <Layout>
-        <Panel bodyScroll={ true }>
-          <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat/>
-          <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em'}}>
+        <Panel bodyScroll={true}>
+          <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat />
+          <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em' }}>
             {content}
           </div>
         </Panel>
-        <Drawer active={ true } type={ 'right' } withOverlay={ false } insideTree={ true }>
-          <div style={{marginTop: '5em'}}>
-            <Filters 
+        <Drawer
+          active={true}
+          type={'right'}
+          withOverlay={false}
+          insideTree={true}
+        >
+          <div style={{ marginTop: '5em' }}>
+            <Filters
               followings={this.state.followings}
               updateFilteredTracks={this.updateFilteredTracks}
               tracks={this.state.tracks}
