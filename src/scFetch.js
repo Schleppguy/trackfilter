@@ -9,7 +9,8 @@ SC.initialize({
 });
 
 export const getTracks = () => {
-  if (process.env.REACT_APP_ENV === 'development') {
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV === 'development') {
     return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
     return SC.connect()
@@ -33,7 +34,7 @@ export const getFollowings = user => {
 };
 
 export const getMyFollowings = () => {
-  if (process.env.REACT_APP_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     return getFollowings(DEFAULT_USER_ID);
   } else {
     return SC.connect()
