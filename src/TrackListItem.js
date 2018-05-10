@@ -16,32 +16,41 @@ class TrackListItem extends Component {
   }
 
   getIframe() {
-    let url = process.env.REACT_APP_ENV === 'development' ?
-      this.props.track.permalink_url :
-      this.props.track.origin.permalink_url
-    axios.get('https://soundcloud.com/oembed',
-      {
+    let url =
+      process.env.NODE_ENV === 'development'
+        ? this.props.track.permalink_url
+        : this.props.track.origin.permalink_url;
+    axios
+      .get('https://soundcloud.com/oembed', {
         params: {
           url: url,
-          format: 'json',
+          format: 'json',
           maxheight: '166',
           maxwidth: '800'
         }
-      }).then( response => {
-        this.setState({iframe: response.data, loaded: true});
-
-      }).catch( error => { console.log(error); });
+      })
+      .then(response => {
+        this.setState({ iframe: response.data, loaded: true });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  render () {
+  render() {
     if (this.state.loaded) {
-      return (<div dangerouslySetInnerHTML={{__html: this.state.iframe.html}} style={{marginBottom: '1em'}}></div>)
+      return (
+        <div
+          dangerouslySetInnerHTML={{ __html: this.state.iframe.html }}
+          style={{ marginBottom: '1em' }}
+        />
+      );
     } else {
       return (
-        <div style={{clear: 'both', height: '200px'}}>
+        <div style={{ clear: 'both', height: '200px' }}>
           <ProgressBar type="circular" mode="indeterminate" />
         </div>
-      )
+      );
     }
   }
 }
