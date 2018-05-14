@@ -20,6 +20,9 @@
     "reselect": "^3.0.1",
     "soundcloud": "^3.3.0"
   },
+  "devDependencies": {
+    "prettier": "^1.12.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -71,8 +74,5 @@
       "input-text-error-color": "var(--color-red)"
     },
     "output": "src/assets/react-toolbox"
-  },
-  "devDependencies": {
-    "prettier": "^1.12.1"
   }
 }
