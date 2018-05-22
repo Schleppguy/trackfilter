@@ -9,6 +9,7 @@ import Drawer from 'react-toolbox/lib/drawer/Drawer';
 import TrackList from './TrackList';
 import Filters from './Filters';
 import scButton from './assets/btn-connect-sc-l.png';
+import FunButton from './containers/FunButton';
 
 class PrimaryLayout extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class PrimaryLayout extends Component {
         <Panel bodyScroll={true}>
           <AppBar title="TrackFilter" leftIcon="filter_list" fixed flat />
           <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em' }}>
+            <FunButton />
             {content}
           </div>
         </Panel>
