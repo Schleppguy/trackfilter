@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Card from 'react-toolbox/lib/card/Card';
 import CardText from 'react-toolbox/lib/card/CardText';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
