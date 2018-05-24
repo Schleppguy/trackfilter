@@ -3,18 +3,18 @@ import _ from 'lodash';
 
 const DEFAULT_USER_ID = '7742327';
 
-SC.initialize({
+http: SC.initialize({
   client_id: process.env.REACT_APP_SC_CLIENT_ID,
   redirect_uri: process.env.REACT_APP_REDIRECT_URI
 });
 
 export const getTracks = () => {
-  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
     return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
     return SC.connect()
-      .then(() => {
+      .then(session => {
+        console.log(session);
         return SC.get('/me/activities/tracks/affiliated', {
           limit: 500,
           streamable: true
