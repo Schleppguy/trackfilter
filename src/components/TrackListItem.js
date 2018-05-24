@@ -21,6 +21,7 @@ const TrackListItem = ({ track }) => {
       <img
         src={formatArtwork(artwork)}
         style={{ height: '15em', width: '15em' }}
+        alt={`${track.user.username}: ${track.title}`}
       />
     </Card>
   );
