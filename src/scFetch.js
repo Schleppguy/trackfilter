@@ -8,8 +8,7 @@ SC.initialize({
   redirect_uri: process.env.REACT_APP_REDIRECT_URI
 });
 
-export const getTracks = () => {
-  console.log(process.env.NODE_ENV);
+export const scGetTracks = () => {
   if (process.env.NODE_ENV === 'development') {
     return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
@@ -27,15 +26,15 @@ export const getTracks = () => {
   }
 };
 
-export const getFollowings = user => {
+export const scGetFollowings = user => {
   return SC.get(`/users/${user}/followings`, { limit: 500 }).then(followings =>
     _.sortBy(followings.collection, ['username'])
   );
 };
 
-export const getMyFollowings = () => {
+export const scGetMyFollowings = () => {
   if (process.env.NODE_ENV === 'development') {
-    return getFollowings(DEFAULT_USER_ID);
+    return scGetFollowings(DEFAULT_USER_ID);
   } else {
     return SC.connect()
       .then(() => {
