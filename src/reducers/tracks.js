@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { getTracksFromSC } from '../actions';
+import { appendNewTracks } from '../actions';
 
 const defaultState = {
   trackList: []
@@ -7,7 +7,7 @@ const defaultState = {
 
 const tracks = handleActions(
   {
-    [getTracksFromSC]: (state, { payload }) => ({
+    [appendNewTracks]: (state, { payload }) => ({
       ...state,
       trackList: state.trackList.concat(payload)
     })

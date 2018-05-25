@@ -5,10 +5,9 @@ import Panel from 'react-toolbox/lib/layout/Panel';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
 
-import SCButton from '../containers/SCButton';
 import TrackList from '../containers/TrackList';
-import Filters from '../Filters';
-import Player from '../containers/Player';
+import Player from './Player';
+// import FunButton from '../containers/FunButton';
 
 class PrimaryLayout extends Component {
   state = {
@@ -42,7 +41,6 @@ class PrimaryLayout extends Component {
               flat
             />
             <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em' }}>
-              <SCButton />
               <TrackList />
             </div>
             <Player className="player" />

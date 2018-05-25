@@ -1,17 +1,18 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import TrackListItem from '../components/TrackListItem';
-
-const TrackList = props => {
-  let items = props.trackList.map((track, i) => {
-    return <TrackListItem track={track} key={i} />;
-  });
-
-  return <div>{items}</div>;
-};
+import { getNewTracks, startSession } from '../actions';
+import TrackListView from '../components/TrackListView';
 
 const mapStateToProps = state => {
   return { trackList: state.tracks.trackList };
 };
 
-export default connect(mapStateToProps)(TrackList);
+const mapDispatchToProps = dispatch => {
+  return {
+    getNewTracks: () => dispatch(getNewTracks()),
+    startSession: () => dispatch(startSession())
+  };
+};
+
+const TrackList = connect(mapStateToProps, mapDispatchToProps)(TrackListView);
+
+export default TrackList;

@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from 'react-toolbox/lib/card/Card';
-import CardText from 'react-toolbox/lib/card/CardText';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
 
 // TODO - Maybe move this to a formatting util when tracks are received from api
