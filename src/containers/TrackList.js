@@ -3,7 +3,12 @@ import { getNewTracks, startSession } from '../actions';
 import TrackListView from '../components/TrackListView';
 
 const mapStateToProps = state => {
-  return { trackList: state.tracks.trackList };
+  const { trackList, loading, lastError } = state.tracks;
+  return {
+    trackList: trackList,
+    loading: loading,
+    lastError: lastError
+  };
 };
 
 const mapDispatchToProps = dispatch => {
