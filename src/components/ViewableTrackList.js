@@ -4,7 +4,6 @@ import SCButton from './SCButton';
 // import exampleTracks from '../exampleTracks.json';
 
 const TrackListView = props => {
-  console.log(props);
   const items = props.trackList.map((track, i) => {
     return <TrackListItem track={track} key={i} />;
   });
