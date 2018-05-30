@@ -3,7 +3,7 @@ import TrackListItem from './TrackListItem';
 import SCButton from './SCButton';
 // import exampleTracks from '../exampleTracks.json';
 
-const TrackListView = props => {
+const ViewableTrackList = props => {
   const items = props.trackList.map((track, i) => {
     return <TrackListItem track={track} key={i} />;
   });
@@ -16,4 +16,4 @@ const TrackListView = props => {
   );
 };
 
-export default TrackListView;
+export default ViewableTrackList;
