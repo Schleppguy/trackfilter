@@ -7,6 +7,7 @@ import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
 
 import TrackList from '../containers/TrackList';
 import Player from './Player';
+import ClientFilters from '../containers/ClientFilters';
 // import FunButton from '../containers/FunButton';
 
 class PrimaryLayout extends Component {
@@ -28,9 +29,7 @@ class PrimaryLayout extends Component {
             width="wide"
             permanentAt="md"
           >
-            <div style={{ flex: 1, padding: '1.8rem', marginTop: '2em' }}>
-              <h3>Filters</h3>
-            </div>
+            <ClientFilters />
           </NavDrawer>
           <Panel bodyScroll={true}>
             <AppBar

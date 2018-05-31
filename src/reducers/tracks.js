@@ -1,15 +1,31 @@
 import { handleActions } from 'redux-actions';
-import { appendNewTracks } from '../actions';
+import {
+  appendNewTracks,
+  newTracksAppended,
+  newTracksAppendFailed
+} from '../actions';
 
 const defaultState = {
-  trackList: []
+  loading: false,
+  trackList: [],
+  lastError: null
 };
 
 const tracks = handleActions(
   {
     [appendNewTracks]: (state, { payload }) => ({
       ...state,
-      trackList: state.trackList.concat(payload)
+      loading: true
+    }),
+    [newTracksAppended]: (state, { payload }) => ({
+      ...state,
+      trackList: state.trackList.concat(payload),
+      loading: false
+    }),
+    [newTracksAppendFailed]: (state, { payload }) => ({
+      ...state,
+      lastError: payload,
+      loading: false
     })
   },
   defaultState
