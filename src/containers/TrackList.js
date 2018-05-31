@@ -3,7 +3,7 @@ import { getNewTracks, startSession } from '../actions';
 import ViewableTrackList from '../components/ViewableTrackList';
 import _ from 'lodash';
 
-const isIncluded = (fullString, subString) => {
+export const isIncluded = (fullString, subString) => {
   return fullString.toLowerCase().includes(subString.trimLeft().toLowerCase());
 };
 
