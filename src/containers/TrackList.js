@@ -3,25 +3,25 @@ import { getNewTracks, startSession } from '../actions';
 import ViewableTrackList from '../components/ViewableTrackList';
 import _ from 'lodash';
 
-const filterByTrackName = (track, filters) => {
-  return filters.byTrackName === ''
-    ? true
-    : track.title
-        .toLowerCase()
-        .includes(filters.byTrackName.trimLeft().toLowerCase());
+const isIncluded = (fullString, subString) => {
+  return fullString.toLowerCase().includes(subString.trimLeft().toLowerCase());
 };
 
-const filterByArtistName = (track, filters) => {
+export const filterByTrackName = (track, filters) => {
+  return filters.byTrackName === ''
+    ? true
+    : isIncluded(track.title, filters.byTrackName);
+};
+
+export const filterByArtistName = (track, filters) => {
   return filters.byArtistName === ''
     ? true
-    : track.user.username
-        .toLowerCase()
-        .includes(filters.byArtistName.trimLeft().toLowerCase());
+    : isIncluded(track.user.username, filters.byArtistName);
 };
 
 const FILTER_LIST = [filterByTrackName, filterByArtistName];
 
-const filterTrackList = (trackList, filters) => {
+export const filterTrackList = (trackList, filters) => {
   return _.filter(trackList, track =>
     _.every(_.map(FILTER_LIST, f => f(track, filters)))
   );
