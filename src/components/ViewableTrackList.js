@@ -1,7 +1,6 @@
 import React from 'react';
 import TrackListItem from './TrackListItem';
 import SCButton from './SCButton';
-// import exampleTracks from '../exampleTracks.json';
 
 const ViewableTrackList = props => {
   const items = props.trackList.map((track, i) => {
