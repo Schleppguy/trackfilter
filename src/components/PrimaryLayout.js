@@ -39,7 +39,14 @@ class PrimaryLayout extends Component {
               fixed
               flat
             />
-            <div style={{ flex: 1, padding: '1.8rem', marginTop: '5em' }}>
+            <div
+              style={{
+                flex: 1,
+                padding: '1.8rem',
+                marginTop: '5em',
+                paddingBottom: '6em'
+              }}
+            >
               <TrackList />
             </div>
             <Player className="player" />
