@@ -2,6 +2,7 @@
   "name": "track-filter",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "express": "^4.16.3",
     "lodash": "^4.17.5",
@@ -28,6 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "node src/server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
