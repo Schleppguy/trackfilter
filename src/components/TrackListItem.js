@@ -9,6 +9,7 @@ const formatArtwork = url => {
 };
 
 const TrackListItem = ({ track }) => {
+  track = process.env.NODE_ENV === 'production' ? track.origin : track;
   const artwork = track.artwork_url ? track.artwork_url : track.user.avatar_url;
   return (
     <Card style={{ margin: '1em', width: '90%' }}>
