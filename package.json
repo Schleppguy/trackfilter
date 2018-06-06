@@ -28,7 +28,7 @@
     "prettier": "^1.12.1"
   },
   "scripts": {
-    "client": "react-scripts start",
+    "dev": "react-scripts start",
     "start": "node src/server/index.js",
     "heroku-postbuild": "yarn && yarn run build",
     "build": "react-scripts build",

@@ -1,5 +1,4 @@
 import SC from 'soundcloud';
-import exampleTracks from './exampleTracks.json';
 import _ from 'lodash';
 
 const DEFAULT_USER_ID = '7742327';
@@ -11,15 +10,10 @@ SC.initialize({
 
 export const scGetTracks = () => {
   if (process.env.NODE_ENV === 'development') {
-    // return new Promise(
-    //   Promise.resolve(exampleTracks),
-    //   Promise.reject('example tracks error')
-    // );
     return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
     return SC.connect()
       .then(session => {
-        console.log(session);
         return SC.get('/me/activities/tracks/affiliated', {
           limit: 200,
           streamable: true
@@ -33,12 +27,6 @@ export const scGetTracks = () => {
           ),
           'origin'
         );
-        // const collection = tracks.collection.filter(t => {
-        //   if (t.type === 'track' && t.origin) {
-        //     return t;
-        //   }
-        // });
-        // return collection;
       });
   }
 };
