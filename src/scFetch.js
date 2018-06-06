@@ -26,12 +26,13 @@ export const scGetTracks = () => {
         });
       })
       .then(tracks => {
-        const collection = tracks.collection.filter(t => {
-          if (t.type === 'track' && t.origin) {
-            return t;
-          }
-        });
-        return collection;
+        return _.filter(_.map(tracks.collection, 'origin'), !_.isNull);
+        // const collection = tracks.collection.filter(t => {
+        //   if (t.type === 'track' && t.origin) {
+        //     return t;
+        //   }
+        // });
+        // return collection;
       });
   }
 };
