@@ -13,7 +13,8 @@ export const scGetTracks = () => {
     return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
     return SC.connect()
-      .then(() => {
+      .then(session => {
+        console.log(session);
         return SC.get('/me/activities/tracks/affiliated', {
           limit: 500,
           streamable: true
