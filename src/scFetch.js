@@ -27,10 +27,9 @@ export const scGetTracks = () => {
       })
       .then(tracks => {
         console.log(JSON.stringify(tracks.collection));
-        console.log(tracks.collection);
         return _.filter(
           _.map(tracks.collection, 'origin'),
-          o => !_.isNull(o) && o.type === 'track'
+          o => !_.isNull(o) && o.kind === 'track'
         );
         // const collection = tracks.collection.filter(t => {
         //   if (t.type === 'track' && t.origin) {
