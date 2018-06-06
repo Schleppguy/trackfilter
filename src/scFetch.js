@@ -21,7 +21,11 @@ export const scGetTracks = () => {
         });
       })
       .then(tracks => {
-        const collection = tracks.collection.filter(t => t.type === 'track');
+        const collection = tracks.collection.filter(t => {
+          if (t.type === 'track' && t.origin) {
+            return t;
+          }
+        });
         return collection;
       });
   }
