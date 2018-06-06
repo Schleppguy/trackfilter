@@ -26,10 +26,12 @@ export const scGetTracks = () => {
         });
       })
       .then(tracks => {
-        console.log(JSON.stringify(tracks.collection));
-        return _.filter(
-          _.map(tracks.collection, 'origin'),
-          o => !_.isNull(o) && o.kind === 'track'
+        return _.map(
+          _.filter(
+            tracks.collection,
+            o => o.type === 'track' && !_.isNull(o.origin)
+          ),
+          'origin'
         );
         // const collection = tracks.collection.filter(t => {
         //   if (t.type === 'track' && t.origin) {
