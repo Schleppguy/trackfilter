@@ -10,13 +10,13 @@ export const isIncluded = (fullString, subString) => {
 export const filterByTrackName = (track, filters) => {
   return filters.byTrackName === ''
     ? true
-    : isIncluded(track.origin.title, filters.byTrackName);
+    : isIncluded(track.title, filters.byTrackName);
 };
 
 export const filterByArtistName = (track, filters) => {
   return filters.byArtistName === ''
     ? true
-    : isIncluded(track.origin.user.username, filters.byArtistName);
+    : isIncluded(track.user.username, filters.byArtistName);
 };
 
 const FILTER_LIST = [filterByTrackName, filterByArtistName];

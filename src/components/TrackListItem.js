@@ -8,8 +8,7 @@ const formatArtwork = url => {
   return temp.slice(0, temp.length - 1).join('-') + '-t500x500.jpg';
 };
 
-const TrackListItem = props => {
-  const track = props.track.origin;
+const TrackListItem = ({ track }) => {
   const artwork = track.artwork_url ? track.artwork_url : track.user.avatar_url;
   return (
     <Card style={{ margin: '1em', width: '90%' }}>
