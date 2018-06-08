@@ -20,7 +20,6 @@ class PrimaryLayout extends Component {
   };
 
   render() {
-    console.log(process.env.REACT_APP_SC_CLIENT_ID)
     return (
       <div>
         <Layout>
