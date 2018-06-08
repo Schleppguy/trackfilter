@@ -49,7 +49,10 @@ class PrimaryLayout extends Component {
             >
               <TrackList />
             </div>
-            <Player className="player" />
+            <Player
+              clientId={process.env.REACT_APP_SC_CLIENT_ID}
+              resolveUrl={'https://soundcloud.com/loquai/unison-030-hby-loquai-at-frisky-radio-12042018'}
+            />
           </Panel>
         </Layout>
       </div>
