@@ -38,7 +38,6 @@ const Player = props => {
       </div>
       <div style={{ width: '60%', paddingBottom: '0.1em', marginLeft: '2em' }}>
         <p style={{ fontSize: 'small' }}><strong>{track ? track.user.username : ''}: {track ? track.title : ''}</strong></p>
-        {/* <p style={{ fontSize: 'small' }}>{track ? track.user.username : ''}</p> */}
         <div style={{ display: 'flex' }}>
           <div style={{ width: '5%', textAlign: 'left', paddingTop: '0.5em', fontSize: 'small' }}>{prettyTime(currentTime)}</div>
           <Slider style={{ width: '90%', marginLeft: '1em' }} value={track ? (currentTime / duration) * 100 : 0} />
