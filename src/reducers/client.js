@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { setTrackNameFilter, setArtistNameFilter } from '../actions';
 
-export const defaultState = {
+const defaultState = {
   filters: {
     byTrackName: '',
     byArtistName: ''

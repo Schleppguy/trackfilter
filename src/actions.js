@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { scGetTracks } from './scFetch';
+import { scGetTracks, scGetPlayer } from './scFetch';
 
 export const addFun = createAction('ADD_FUN');
 export const appendNewTracks = createAction('APPEND_NEW_TRACKS');
@@ -7,6 +7,10 @@ export const newTracksAppended = createAction('NEW_TRACKS_APPENDED');
 export const newTracksAppendFailed = createAction('NEW_TRACKS_APPEND_FAILED');
 export const setTrackNameFilter = createAction('SET_TRACK_NAME_FILTER');
 export const setArtistNameFilter = createAction('SET_ARTIST_NAME_FILTER');
+export const loadTrack = createAction('LOAD_TRACK');
+export const trackLoaded = createAction('TRACK_LOADED');
+export const loadTrackFailed = createAction('LOAD_TRACK_FAILED');
+
 
 // async
 export const getNewTracks = () => {
@@ -23,5 +27,16 @@ export const getNewTracks = () => {
 export const startSession = () => {
   return dispatch => {
     dispatch(getNewTracks());
+  };
+};
+
+export const loadTrackToPlayer = track => {
+  return dispatch => {
+    dispatch(loadTrack());
+    scGetPlayer(track).then(player =>
+      dispatch(trackLoaded({ track: track, audio: player })).catch(error =>
+        dispatch(loadTrackFailed(error))
+      )
+    );
   };
 };
