@@ -4,7 +4,7 @@ import SCButton from './SCButton';
 
 const ViewableTrackList = props => {
   const items = props.trackList.map((track, i) => {
-    return <TrackListItem track={track} key={i} loadTrackToPlayer={props.loadTrackToPlayer} />;
+    return <TrackListItem track={track} key={i} loadTrackToPlayer={props.loadTrackToPlayer} volume={props.volume} />;
   });
 
   return (

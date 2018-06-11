@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { loadTrack, trackLoaded, loadTrackFailed } from '../actions';
+import { loadTrack, trackLoaded, loadTrackFailed, togglePlay, updateVolume } from '../actions';
 
 const defaultState = {
   loading: false,
@@ -8,7 +8,6 @@ const defaultState = {
   isPlaying: false,
   isMuted: false,
   volume: 1,
-  currentTime: 0,
   duration: 0,
   isSeeking: false,
   lastError: null
@@ -24,12 +23,21 @@ const player = handleActions(
       ...state,
       track: payload.track,
       audio: payload.audio,
-      loading: false
+      loading: false,
+      duration: payload.track.duration / 1000
     }),
     [loadTrackFailed]: (state, { payload }) => ({
       ...state,
       lastError: payload,
       loading: false
+    }),
+    [togglePlay]: (state, { payload }) => ({
+      ...state,
+      isPlaying: payload
+    }),
+    [updateVolume]: (state, { payload }) => ({
+      ...state,
+      volume: payload
     })
   },
   defaultState

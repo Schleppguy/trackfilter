@@ -30,10 +30,12 @@ export const filterTrackList = (trackList, filters) => {
 const mapStateToProps = state => {
   const { trackList, loading } = state.tracks;
   const { filters } = state.client;
+  const { volume } = state.player;
   return {
     trackList: filterTrackList(trackList, filters),
     loading,
-    filters
+    filters,
+    volume
   };
 };
 
@@ -41,7 +43,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getNewTracks: () => dispatch(getNewTracks()),
     startSession: () => dispatch(startSession()),
-    loadTrackToPlayer: track => dispatch(loadTrackToPlayer(track))
+    loadTrackToPlayer: (track, volume) => dispatch(loadTrackToPlayer(track, volume))
   };
 };
 

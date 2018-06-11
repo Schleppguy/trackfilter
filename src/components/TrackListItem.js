@@ -8,7 +8,7 @@ const formatArtwork = url => {
   return temp.slice(0, temp.length - 1).join('-') + '-t500x500.jpg';
 };
 
-const TrackListItem = ({ track, loadTrackToPlayer }) => {
+const TrackListItem = ({ track, volume, loadTrackToPlayer }) => {
   const artwork = track.artwork_url ? track.artwork_url : track.user.avatar_url;
 
   return (
@@ -23,7 +23,7 @@ const TrackListItem = ({ track, loadTrackToPlayer }) => {
         style={{ height: '15em', width: '15em' }}
         alt={`${track.user.username}: ${track.title}`}
       />
-      <button onClick={() => loadTrackToPlayer(track)}>Load Track to Player</button>
+      <button onClick={() => loadTrackToPlayer(track, volume)}>Load Track to Player</button>
     </Card>
   );
 };
