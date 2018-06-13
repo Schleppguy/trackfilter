@@ -2,6 +2,7 @@ import React from 'react';
 import PlayLoad from '../containers/PlayLoad';
 import Card from 'react-toolbox/lib/card/Card';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
+import Avatar from 'react-toolbox/lib/avatar/Avatar';
 
 // TODO - Maybe move this to a formatting util when tracks are received from api
 const formatArtwork = url => {
@@ -14,11 +15,12 @@ const TrackListItem = ({ track }) => {
 
   return (
     <Card style={{ margin: '1em', width: '90%' }}>
-      <CardTitle
-        avatar={track.user.avatar_url}
-        title={track.title}
-        subtitle={track.user.username}
-      />
+      <div style={{ display: 'flex', alignItems: 'baseline' }}>
+        <div style={{ display: 'flex' }}>
+          <Avatar title={track.user.username} image={track.user.avatar_url} />
+          <p>{track.user.username}</p>
+        </div>
+      </div>
       <div style={{ display: 'flex' }}>
         <img
           src={formatArtwork(artwork)}
@@ -26,6 +28,9 @@ const TrackListItem = ({ track }) => {
           alt={`${track.user.username}: ${track.title}`}
         />
         <PlayLoad track={track} context='feed' />
+
+        <h2>{track.title}</h2>
+        <p>{track.user.username}</p>
       </div>
     </Card>
   );
