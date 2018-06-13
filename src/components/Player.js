@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import playerStyle from '../styles/playerStyle';
 import { displayTime } from '../displayUtils';
-import Button from 'react-toolbox/lib/button/Button';
+import PlayLoad from '../containers/PlayLoad';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Slider from 'react-toolbox/lib/slider/Slider';
 
@@ -10,22 +10,22 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTime: 0
+      currentTime: 0,
     }
-    this.play = this.play.bind(this);
     this.updateTime = this.updateTime.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.toggleMute = this.toggleMute.bind(this)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.audio !== prevProps.audio) {
+      this.props.audio.on('time', this.updateTime)
+    }
   }
 
   updateTime() {
     this.setState({ currentTime: this.props.audio.currentTime() / 1000 })
-  }
-
-  play() {
-    this.props.isPlaying ? this.props.audio.pause() : this.props.audio.play();
-    this.props.togglePlay(!this.props.isPlaying)
-    this.props.audio.on('time', this.updateTime)
   }
 
   handleVolumeChange(v) {
@@ -34,24 +34,21 @@ class Player extends Component {
   }
 
   handleTimeChange(v) {
-    this.props.audio.seek((this.props.duration * v) * 1000).then(
-      this.updateTime()
-    )
+    this.props.audio.seek((this.props.duration * v) * 1000)
+  }
+
+  toggleMute() {
+    this.props.currentVolume > 0 ? this.handleVolumeChange(0) : this.handleVolumeChange(this.props.lastVolume)
   }
 
   render() {
-    const { track, loading, duration, isMuted, isPlaying, isSeeking, volume, audio } = this.props;
+    const { track, loading, duration, currentVolume, audio } = this.props;
     const disabled = audio ? false : true;
     return (
       <div style={playerStyle()} >
         <div style={{ width: '10%' }} >
-          <Button
-            style={{ margin: '1em', marginLeft: '50%' }}
-            icon={isPlaying ? "pause" : "play_arrow"}
-            floating
-            accent
-            mini
-            onClick={this.play}
+          <PlayLoad
+            context='player'
             disabled={disabled}
           />
         </div>
@@ -77,23 +74,24 @@ class Player extends Component {
                   value={duration ? this.state.currentTime / duration : 0}
                   disabled={disabled}
                   max={1}
-                  onChange={v => this.handleTimeChange(v)}
+                  onChange={this.handleTimeChange}
                 />
                 <div style={{ width: '5%', fontSize: 'small' }}>
                   {displayTime(duration)}
                 </div>
                 <IconButton
                   style={{ width: '5%', marginLeft: '2em' }}
-                  icon={isMuted ? 'volume_off' : 'volume_up'}
+                  icon={currentVolume === 0 ? 'volume_off' : 'volume_up'}
                   disabled={disabled}
                   accent
+                  onClick={this.toggleMute}
                 />
                 <Slider
                   style={{ width: '20%' }}
-                  value={volume ? volume : 1}
+                  value={currentVolume}
                   max={1}
                   disabled={disabled}
-                  onChange={v => this.handleVolumeChange(v)}
+                  onChange={this.handleVolumeChange}
                 />
               </div>
             </div>

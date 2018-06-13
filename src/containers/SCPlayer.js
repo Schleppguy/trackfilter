@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loadTrackToPlayer, togglePlay, updateVolume } from '../actions';
+import { togglePlay, updateVolume } from '../actions';
 import Player from '../components/Player';
 
 
@@ -10,19 +10,20 @@ const mapStateToProps = state => {
     loading,
     audio,
     isPlaying,
-    isMuted,
-    volume,
+    currentVolume,
+    lastVolume,
     duration,
     isSeeking,
     lastError
   } = state.player;
+
   return {
     track,
     loading,
     audio,
     isPlaying,
-    isMuted,
-    volume,
+    currentVolume,
+    lastVolume,
     duration,
     isSeeking,
     lastError
@@ -31,7 +32,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadTrackToPlayer: track => dispatch(loadTrackToPlayer(track)),
     togglePlay: bool => dispatch(togglePlay(bool)),
     updateVolume: value => dispatch(updateVolume(value))
   };

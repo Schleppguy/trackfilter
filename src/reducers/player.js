@@ -6,10 +6,10 @@ const defaultState = {
   track: null,
   audio: null,
   isPlaying: false,
-  isMuted: false,
-  volume: 1,
+  currentVolume: 1,
+  lastVolume: 0,
   duration: 0,
-  isSeeking: false,
+  currentTime: 0,
   lastError: null
 };
 
@@ -37,7 +37,8 @@ const player = handleActions(
     }),
     [updateVolume]: (state, { payload }) => ({
       ...state,
-      volume: payload
+      currentVolume: payload,
+      lastVolume: state.currentVolume
     })
   },
   defaultState

@@ -38,12 +38,14 @@ export const loadTrackToPlayer = (track, volume) => {
   return dispatch => {
     dispatch(loadTrack());
     scGetPlayer(track).then(player => {
-      player.setVolume(volume)
+      player.setVolume(volume);
       return player
-    }).then(player =>
+    }).then(player => {
+      player.play()
+      dispatch(togglePlay(true))
       dispatch(trackLoaded({ track: track, audio: player })).catch(error =>
         dispatch(loadTrackFailed(error))
       )
-    )
+    })
   };
 };

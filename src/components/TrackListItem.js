@@ -1,4 +1,5 @@
 import React from 'react';
+import PlayLoad from '../containers/PlayLoad';
 import Card from 'react-toolbox/lib/card/Card';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
 
@@ -8,7 +9,7 @@ const formatArtwork = url => {
   return temp.slice(0, temp.length - 1).join('-') + '-t500x500.jpg';
 };
 
-const TrackListItem = ({ track, volume, loadTrackToPlayer }) => {
+const TrackListItem = ({ track }) => {
   const artwork = track.artwork_url ? track.artwork_url : track.user.avatar_url;
 
   return (
@@ -18,12 +19,14 @@ const TrackListItem = ({ track, volume, loadTrackToPlayer }) => {
         title={track.title}
         subtitle={track.user.username}
       />
-      <img
-        src={formatArtwork(artwork)}
-        style={{ height: '15em', width: '15em' }}
-        alt={`${track.user.username}: ${track.title}`}
-      />
-      <button onClick={() => loadTrackToPlayer(track, volume)}>Load Track to Player</button>
+      <div style={{ display: 'flex' }}>
+        <img
+          src={formatArtwork(artwork)}
+          style={{ height: '12em', width: '12em' }}
+          alt={`${track.user.username}: ${track.title}`}
+        />
+        <PlayLoad track={track} context='feed' />
+      </div>
     </Card>
   );
 };
