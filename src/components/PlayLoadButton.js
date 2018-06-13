@@ -47,6 +47,7 @@ const PlayLoadButton = props => {
         icon={iconVal}
         floating
         accent
+        mini
         onClick={play}
       />
     )
