@@ -1,5 +1,11 @@
 import { handleActions } from 'redux-actions';
-import { loadTrack, trackLoaded, loadTrackFailed, togglePlay, updateVolume } from '../actions';
+import {
+  loadTrack,
+  trackLoaded,
+  loadTrackFailed,
+  togglePlay,
+  updateVolume
+} from '../actions';
 
 const defaultState = {
   loading: false,

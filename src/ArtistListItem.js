@@ -11,13 +11,13 @@ class ArtistListItem extends Component {
   }
 
   handleCheckboxChange() {
-    this.props.updateSelectedArtists(this.props.artist)
-    this.setState({checkboxActive: !this.state.checkboxActive})
+    this.props.updateSelectedArtists(this.props.artist);
+    this.setState({ checkboxActive: !this.state.checkboxActive });
   }
 
   render() {
     return (
-      <ListCheckbox 
+      <ListCheckbox
         checked={this.state.checkboxActive}
         caption={this.props.artist.username}
         onChange={this.handleCheckboxChange}

@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const ClientFilters = connect(mapStateToProps, mapDispatchToProps)(Filters);
+const ClientFilters = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Filters);
 
 export default ClientFilters;

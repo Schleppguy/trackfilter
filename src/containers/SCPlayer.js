@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import { togglePlay, updateVolume } from '../actions';
 import Player from '../components/Player';
 
-
-
 const mapStateToProps = state => {
   const {
     track,
@@ -37,8 +35,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SCPlayer = connect(mapStateToProps, mapDispatchToProps)(
-  Player
-);
+const SCPlayer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
 
 export default SCPlayer;

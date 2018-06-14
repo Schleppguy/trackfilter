@@ -22,25 +22,34 @@ class TrackListItem extends React.Component {
   formatArtwork(url) {
     const temp = url.split('-');
     return temp.slice(0, temp.length - 1).join('-') + '-t500x500.jpg';
-  };
+  }
 
   toggleDescription() {
-    this.setState({ showDescription: !this.state.showDescription })
-  };
+    this.setState({ showDescription: !this.state.showDescription });
+  }
 
   render() {
     const { track } = this.props;
-    const artwork = track.artwork_url ? track.artwork_url : track.user.avatar_url;
+    const artwork = track.artwork_url
+      ? track.artwork_url
+      : track.user.avatar_url;
     return (
-      <Card style={{ marginTop: '0.5em', width: '100%' }}>
+      <Card style={{ marginTop: '0.5em', width: '90%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', margin: '0.5em' }}>
+          <div
+            style={{ display: 'flex', alignItems: 'baseline', margin: '0.5em' }}
+          >
             <Avatar title={track.user.username} image={track.user.avatar_url} />
             <p style={{ marginLeft: '0.5em', fontSize: 'small' }}>
-              <strong>{track.user.username}</strong> posted this track {moment(track.created_at).from(moment())}
+              <strong>{track.user.username}</strong> posted this track{' '}
+              {moment(track.created_at).from(moment())}
             </p>
           </div>
-          {track.genre && <Chip style={{ margin: '1em' }}><strong>{track.genre}</strong></Chip>}
+          {track.genre && (
+            <Chip style={{ margin: '1em' }}>
+              <strong>{track.genre}</strong>
+            </Chip>
+          )}
         </div>
         <div style={{ display: 'flex', width: '100%' }}>
           <img
@@ -49,27 +58,54 @@ class TrackListItem extends React.Component {
             alt={`${track.user.username}: ${track.title}`}
           />
           <div style={{ width: '5em', marginTop: '0.5em' }}>
-            <PlayLoad track={track} context='feed' />
+            <PlayLoad track={track} context="feed" />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '1em', marginRight: '1em' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginLeft: '1em',
+              marginRight: '1em'
+            }}
+          >
             <div style={{ fontSize: 'small' }}>{track.user.username}</div>
-            <div style={{ marginTop: '0.3em', fontSize: 'medium' }}><strong>{track.title}</strong></div>
-            <div style={{ display: 'flex', marginTop: '2em', alignItems: 'center' }}>
+            <div style={{ marginTop: '0.3em', fontSize: 'medium' }}>
+              <strong>{track.title}</strong>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                marginTop: '2em',
+                alignItems: 'center'
+              }}
+            >
               <div>Duration: {displayTime(track.duration / 1000)}</div>
             </div>
           </div>
         </div>
-        {this.state.showDescription && <CardText>{track.description ? track.description.split('\n').map((line, i) => <p key={i}>{line}</p>) : ''}</CardText>}
+        {this.state.showDescription && (
+          <CardText>
+            {track.description
+              ? track.description
+                  .split('\n')
+                  .map((line, i) => <p key={i}>{line}</p>)
+              : ''}
+          </CardText>
+        )}
         <CardActions>
           <Button
             icon={this.state.showDescription ? 'remove' : 'add'}
-            label={this.state.showDescription ? 'Hide Description' : 'Show Description'}
+            label={
+              this.state.showDescription
+                ? 'Hide Description'
+                : 'Show Description'
+            }
             onClick={this.toggleDescription}
           />
         </CardActions>
       </Card>
     );
   }
-};
+}
 
 export default TrackListItem;

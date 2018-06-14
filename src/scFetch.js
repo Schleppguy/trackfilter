@@ -32,8 +32,8 @@ export const scGetTracks = () => {
 };
 
 export const scGetPlayer = track => {
-  return SC.stream(`/tracks/${track.id}`)
-}
+  return SC.stream(`/tracks/${track.id}`);
+};
 
 export const scGetFollowings = user => {
   return SC.get(`/users/${user}/followings`, { limit: 500 }).then(followings =>

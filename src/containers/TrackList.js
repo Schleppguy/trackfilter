@@ -46,8 +46,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const TrackList = connect(mapStateToProps, mapDispatchToProps)(
-  ViewableTrackList
-);
+const TrackList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewableTrackList);
 
 export default TrackList;

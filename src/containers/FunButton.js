@@ -16,4 +16,7 @@ const mapDispatchToProps = dispatch => {
   return { addFun: () => dispatch(addFun(FUN_AMOUNT)) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FunButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FunButton);
