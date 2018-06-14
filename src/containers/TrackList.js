@@ -19,7 +19,13 @@ export const filterByArtistName = (track, filters) => {
     : isIncluded(track.user.username, filters.byArtistName);
 };
 
-const FILTER_LIST = [filterByTrackName, filterByArtistName];
+export const filterByGenre = (track, filters) => {
+  return filters.byGenre === ''
+    ? true
+    : isIncluded(track.genre, filters.byGenre);
+};
+
+const FILTER_LIST = [filterByTrackName, filterByArtistName, filterByGenre];
 
 export const filterTrackList = (trackList, filters) => {
   return _.filter(trackList, track =>

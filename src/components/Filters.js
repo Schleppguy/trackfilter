@@ -15,6 +15,11 @@ const Filters = props => {
         action={props.setArtistNameFilter}
         label="By Artist Name"
       />
+      <FilterByInput
+        value={props.filters.byGenre}
+        action={props.setGenreFilter}
+        label="By Genre"
+      />
     </div>
   );
 };

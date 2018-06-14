@@ -7,6 +7,7 @@ export const newTracksAppended = createAction('NEW_TRACKS_APPENDED');
 export const newTracksAppendFailed = createAction('NEW_TRACKS_APPEND_FAILED');
 export const setTrackNameFilter = createAction('SET_TRACK_NAME_FILTER');
 export const setArtistNameFilter = createAction('SET_ARTIST_NAME_FILTER');
+export const setGenreFilter = createAction('SET_GENRE_FILTER');
 export const loadTrack = createAction('LOAD_TRACK');
 export const trackLoaded = createAction('TRACK_LOADED');
 export const loadTrackFailed = createAction('LOAD_TRACK_FAILED');

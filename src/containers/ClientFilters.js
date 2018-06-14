@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { setTrackNameFilter, setArtistNameFilter } from '../actions';
+import {
+  setTrackNameFilter,
+  setArtistNameFilter,
+  setGenreFilter
+} from '../actions';
 import Filters from '../components/Filters';
 
 const mapStateToProps = state => {
@@ -12,7 +16,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setTrackNameFilter: input => dispatch(setTrackNameFilter(input)),
-    setArtistNameFilter: input => dispatch(setArtistNameFilter(input))
+    setArtistNameFilter: input => dispatch(setArtistNameFilter(input)),
+    setGenreFilter: input => dispatch(setGenreFilter(input))
   };
 };
 
