@@ -10,5 +10,21 @@ export default {
     color: '#424242',
     zIndex: 300
   },
-  artwork: { height: '2.5em', width: '2.5em' }
+  artwork: { height: '2.5em', width: '2.5em' },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '0.5em'
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    paddingBottom: '0.5em'
+  },
+  volume: {
+    display: 'flex',
+    width: '25%',
+    alignItems: 'baseline'
+  }
 };
