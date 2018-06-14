@@ -11,13 +11,31 @@ import ClientFilters from '../containers/ClientFilters';
 // import FunButton from '../containers/FunButton';
 
 class PrimaryLayout extends Component {
-  state = {
-    drawerActive: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      drawerActive: false,
+      drawerPinned: window.innerWidth > 900
+    };
+    this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
+  }
 
-  toggleDrawerActive = () => {
+  handleResize() {
+    this.setState({ drawerPinned: window.innerWidth > 900 });
+  }
+
+  toggleDrawerActive() {
     this.setState({ drawerActive: !this.state.drawerActive });
-  };
+  }
+
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this));
+  }
 
   render() {
     return (
@@ -25,20 +43,28 @@ class PrimaryLayout extends Component {
         <Layout>
           <NavDrawer
             active={this.state.drawerActive}
+            pinned={this.state.drawerPinned}
             onOverlayClick={this.toggleDrawerActive}
             width="wide"
-            permanentAt="md"
           >
             <ClientFilters />
           </NavDrawer>
           <Panel bodyScroll={true}>
             <AppBar
-              title="TrackFilter"
-              leftIcon="filter_list"
+              leftIcon={this.state.drawerPinned ? '' : 'filter_list'}
               onLeftIconClick={this.toggleDrawerActive}
               fixed
               flat
-            />
+            >
+              <div
+                style={{
+                  fontSize: '1.5em',
+                  marginLeft: this.state.drawerPinned ? '50%' : '25%'
+                }}
+              >
+                <strong>TrackFilter</strong>
+              </div>
+            </AppBar>
             <div
               style={{
                 flex: 1,
