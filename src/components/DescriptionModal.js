@@ -4,6 +4,8 @@ import Button from 'react-toolbox/lib/button/Button';
 import Link from 'react-toolbox/lib/link/Link';
 import Card from 'react-toolbox/lib/card/Card';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
+import CardText from 'react-toolbox/lib/card/CardText';
+import CardActions from 'react-toolbox/lib/card/CardActions';
 
 const customStyles = {
   content: {
@@ -34,6 +36,7 @@ class DescriptionModal extends Component {
   }
 
   render() {
+    const { track } = this.props;
     return (
       <div style={{ marginTop: '0.5em' }}>
         <Link active icon='add' label='Show Description' onClick={this.openModal} style={{ marginLeft: '3em', marginBottom: '0.5em' }} />
@@ -42,11 +45,19 @@ class DescriptionModal extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div>{this.props.track.title}</div>
-            <div>{this.props.track.description}</div>
-            <Button style={{ marginTop: '1em' }} icon='remove' label='Hide Description' raised primary onClick={this.closeModal} />
-          </div>
+          <Card>
+            <CardTitle
+              avatar={track.user.avatar_url}
+              title={track.user.username}
+            />
+            <CardTitle
+              title={track.title}
+            />
+            <CardText>{track.description ? track.description.split('\n').map((line, i) => <p key={i}>{line}</p>) : ''}</CardText>
+            <CardActions>
+              <Button icon='remove' label='Hide Description' onClick={this.closeModal} />
+            </CardActions>
+          </Card>
         </Modal>
       </div>
     );
