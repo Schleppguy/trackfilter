@@ -5,25 +5,19 @@ import Player from '../components/Player';
 const mapStateToProps = state => {
   const {
     track,
-    loading,
     audio,
     isPlaying,
     currentVolume,
     lastVolume,
-    duration,
-    isSeeking,
     lastError
   } = state.player;
 
   return {
     track,
-    loading,
     audio,
     isPlaying,
     currentVolume,
     lastVolume,
-    duration,
-    isSeeking,
     lastError
   };
 };

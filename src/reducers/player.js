@@ -15,7 +15,6 @@ const defaultState = {
   currentVolume: 1,
   lastVolume: 0,
   duration: 0,
-  currentTime: 0,
   lastError: null
 };
 
