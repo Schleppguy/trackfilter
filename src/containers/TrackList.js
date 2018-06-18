@@ -4,7 +4,9 @@ import ViewableTrackList from '../components/ViewableTrackList';
 import _ from 'lodash';
 
 export const isIncluded = (fullString, subString) => {
-  return fullString.toLowerCase().includes(subString.trimLeft().toLowerCase());
+  return fullString === null
+    ? false
+    : fullString.toLowerCase().includes(subString.trimLeft().toLowerCase());
 };
 
 export const filterByTrackName = (track, filters) => {
