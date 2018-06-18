@@ -3,21 +3,12 @@ import { loadTrackToPlayer, togglePlay } from '../actions';
 import PlayLoadButton from '../components/PlayLoadButton';
 
 const mapStateToProps = state => {
-  const {
-    loading,
-    track,
-    audio,
-    isPlaying,
-    currentVolume,
-    lastVolume
-  } = state.player;
+  const { track, audio, isPlaying, currentVolume } = state.player;
   return {
-    loading,
     playerTrack: track,
     audio,
     isPlaying,
-    currentVolume,
-    lastVolume
+    currentVolume
   };
 };
 

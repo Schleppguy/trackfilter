@@ -3,22 +3,13 @@ import { togglePlay, updateVolume } from '../actions';
 import Player from '../components/Player';
 
 const mapStateToProps = state => {
-  const {
-    track,
-    audio,
-    isPlaying,
-    currentVolume,
-    lastVolume,
-    lastError
-  } = state.player;
+  const { track, audio, currentVolume, lastVolume } = state.player;
 
   return {
     track,
     audio,
-    isPlaying,
     currentVolume,
-    lastVolume,
-    lastError
+    lastVolume
   };
 };
 

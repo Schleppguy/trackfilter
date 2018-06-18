@@ -3,19 +3,14 @@ import TrackListItem from './TrackListItem';
 import SCButton from './SCButton';
 
 const ViewableTrackList = props => {
-  const items = props.trackList.map((track, i) => {
-    return (
-      <TrackListItem
-        track={track}
-        key={i}
-        loadTrackToPlayer={props.loadTrackToPlayer}
-      />
-    );
+  const { trackList, startSession, loading } = props;
+  const items = trackList.map((track, i) => {
+    return <TrackListItem track={track} key={i} />;
   });
 
   return (
     <div>
-      <SCButton startSession={props.startSession} />
+      <SCButton startSession={startSession} />
       {items}
     </div>
   );
