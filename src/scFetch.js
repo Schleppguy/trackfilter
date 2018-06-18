@@ -8,26 +8,34 @@ SC.initialize({
   redirect_uri: process.env.REACT_APP_REDIRECT_URI
 });
 
+export const scAuth = () => {
+  return process.env.NODE_ENV === 'development'
+    ? new Promise(resolve => resolve('development'))
+    : SC.connect();
+};
+
 export const scGetTracks = () => {
   if (process.env.NODE_ENV === 'development') {
-    return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
+    return SC.get(`/users/${DEFAULT_USER_ID}/favorites`, {
+      linked_partitioning: 1
+    }).then(tracks => {
+      console.log(tracks);
+      return tracks.collection;
+    });
   } else {
-    return SC.connect()
-      .then(session => {
-        return SC.get('/me/activities/tracks/affiliated', {
-          limit: 200,
-          streamable: true
-        });
-      })
-      .then(tracks => {
-        return _.map(
-          _.filter(
-            tracks.collection,
-            o => o.type === 'track' && !_.isNull(o.origin)
-          ),
-          'origin'
-        );
-      });
+    return SC.get('/me/activities/tracks/affiliated', {
+      limit: 200,
+      streamable: true
+    }).then(tracks => {
+      console.log(tracks);
+      return _.map(
+        _.filter(
+          tracks.collection,
+          o => o.type === 'track' && !_.isNull(o.origin)
+        ),
+        'origin'
+      );
+    });
   }
 };
 
@@ -45,10 +53,8 @@ export const scGetMyFollowings = () => {
   if (process.env.NODE_ENV === 'development') {
     return scGetFollowings(DEFAULT_USER_ID);
   } else {
-    return SC.connect()
-      .then(() => {
-        return SC.get('/me/followings', { limit: 500 });
-      })
-      .then(followings => _.sortBy(followings.collection, ['username']));
+    return SC.get('/me/followings', { limit: 500 }).then(followings =>
+      _.sortBy(followings.collection, ['username'])
+    );
   }
 };

@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { scGetTracks, scGetPlayer } from './scFetch';
+import { scGetTracks, scGetPlayer, scAuth, scGetMyFollowings } from './scFetch';
 
 export const addFun = createAction('ADD_FUN');
 export const appendNewTracks = createAction('APPEND_NEW_TRACKS');
@@ -26,9 +26,15 @@ export const getNewTracks = () => {
   };
 };
 
+export const getMyFollowings = () => {
+  return scGetMyFollowings();
+};
+
 export const startSession = () => {
   return dispatch => {
-    dispatch(getNewTracks());
+    scAuth().then(session => {
+      dispatch(getNewTracks());
+    });
   };
 };
 
