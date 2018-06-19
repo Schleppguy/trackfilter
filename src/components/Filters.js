@@ -1,11 +1,17 @@
 import React from 'react';
 import FilterByInput from './FilterByInput';
-import { Input } from 'react-materialize';
+import ArtistList from './ArtistList';
 
 const Filters = props => {
   return (
-    <div style={{ flex: 1, padding: '1.8rem', marginTop: '2em' }}>
-      <h3>Filters</h3>
+    <div
+      style={{
+        flex: 1,
+        padding: '1.8rem',
+        marginTop: '2.5em'
+      }}
+    >
+      <h5>Filters</h5>
       <FilterByInput
         value={props.filters.byTrackName}
         action={props.setTrackNameFilter}
@@ -21,7 +27,12 @@ const Filters = props => {
         action={props.setGenreFilter}
         label="By Genre"
       />
-      <Input
+      <ArtistList
+        followings={props.followingsList}
+        setMultipleArtistsFilter={props.setMultipleArtistsFilter}
+      />
+      {/* <Input
+        className="multiselect"
         type="select"
         multiple
         placeholder="Select Multiple Artists"
@@ -32,7 +43,7 @@ const Filters = props => {
             {item.username}
           </option>
         ))}
-      </Input>
+      </Input> */}
     </div>
   );
 };

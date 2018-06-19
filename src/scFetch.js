@@ -39,7 +39,7 @@ export const scGetPlayer = track => {
 
 export const scGetFollowings = user => {
   return SC.get(`/users/${user}/followings`, { limit: 200 }).then(followings =>
-    _.sortBy(followings.collection, ['username'])
+    _.sortBy(followings.collection, [o => o.username.toLowerCase()])
   );
 };
 
@@ -48,7 +48,7 @@ export const scGetMyFollowings = () => {
     return scGetFollowings(DEFAULT_USER_ID);
   } else {
     return SC.get('/me/followings', { limit: 200 }).then(followings =>
-      _.sortBy(followings.collection, ['username'])
+      _.sortBy(followings.collection, [o => o.username.toLowerCase()])
     );
   }
 };

@@ -2,14 +2,16 @@ import { handleActions } from 'redux-actions';
 import {
   setTrackNameFilter,
   setArtistNameFilter,
-  setGenreFilter
+  setGenreFilter,
+  setMultipleArtistsFilter
 } from '../actions';
 
 const defaultState = {
   filters: {
     byTrackName: '',
     byArtistName: '',
-    byGenre: ''
+    byGenre: '',
+    byMultipleArtists: []
   }
 };
 
@@ -26,6 +28,10 @@ const client = handleActions(
     [setGenreFilter]: (state, { payload }) => ({
       ...state,
       filters: { ...state.filters, byGenre: payload }
+    }),
+    [setMultipleArtistsFilter]: (state, { payload }) => ({
+      ...state,
+      filters: { ...state.filters, byMultipleArtists: payload }
     })
   },
   defaultState

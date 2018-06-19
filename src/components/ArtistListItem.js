@@ -11,7 +11,7 @@ class ArtistListItem extends Component {
   }
 
   handleCheckboxChange() {
-    this.props.updateSelectedArtists(this.props.artist);
+    this.props.updateSelectedArtists(this.props.artist.username);
     this.setState({ checkboxActive: !this.state.checkboxActive });
   }
 

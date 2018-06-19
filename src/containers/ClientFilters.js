@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import {
   setTrackNameFilter,
   setArtistNameFilter,
-  setGenreFilter
+  setGenreFilter,
+  setMultipleArtistsFilter
 } from '../actions';
 import Filters from '../components/Filters';
 
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setTrackNameFilter: input => dispatch(setTrackNameFilter(input)),
     setArtistNameFilter: input => dispatch(setArtistNameFilter(input)),
-    setGenreFilter: input => dispatch(setGenreFilter(input))
+    setGenreFilter: input => dispatch(setGenreFilter(input)),
+    setMultipleArtistsFilter: array => dispatch(setMultipleArtistsFilter(array))
   };
 };
 

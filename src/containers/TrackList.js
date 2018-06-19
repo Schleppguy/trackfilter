@@ -27,7 +27,18 @@ export const filterByGenre = (track, filters) => {
     : isIncluded(track.genre, filters.byGenre);
 };
 
-const FILTER_LIST = [filterByTrackName, filterByArtistName, filterByGenre];
+export const filterByMultipleArtists = (track, filters) => {
+  return filters.byMultipleArtists.length === 0
+    ? true
+    : filters.byMultipleArtists.lastIndexOf(track.user.username) >= 0;
+};
+
+const FILTER_LIST = [
+  filterByTrackName,
+  filterByArtistName,
+  filterByGenre,
+  filterByMultipleArtists
+];
 
 export const filterTrackList = (trackList, filters) => {
   return _.filter(trackList, track =>
