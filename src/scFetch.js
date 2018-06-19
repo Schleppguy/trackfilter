@@ -16,18 +16,12 @@ export const scAuth = () => {
 
 export const scGetTracks = () => {
   if (process.env.NODE_ENV === 'development') {
-    return SC.get(`/users/${DEFAULT_USER_ID}/favorites`, {
-      linked_partitioning: 1
-    }).then(tracks => {
-      console.log(tracks);
-      return tracks.collection;
-    });
+    return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
   } else {
     return SC.get('/me/activities/tracks/affiliated', {
       limit: 200,
       streamable: true
     }).then(tracks => {
-      console.log(tracks);
       return _.map(
         _.filter(
           tracks.collection,
@@ -53,8 +47,10 @@ export const scGetMyFollowings = () => {
   if (process.env.NODE_ENV === 'development') {
     return scGetFollowings(DEFAULT_USER_ID);
   } else {
-    return SC.get('/me/followings', { limit: 500 }).then(followings =>
-      _.sortBy(followings.collection, ['username'])
-    );
+    return SC.connect()
+      .then(() => {
+        return SC.get('/me/followings', { limit: 500 });
+      })
+      .then(followings => _.sortBy(followings.collection, ['username']));
   }
 };
