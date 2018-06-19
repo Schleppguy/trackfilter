@@ -50,13 +50,17 @@ class ArtistList extends Component {
   render() {
     return (
       <div>
-        <Button label="By Multiple Artists" onClick={this.handleDialogToggle} />
+        <Button
+          label="By Artist"
+          onClick={this.handleDialogToggle}
+          icon="launch"
+        />
         <Dialog
           actions={this.actions()}
           active={this.state.dialogActive}
           onEscKeyDown={this.handleDialogToggle}
           onOverlayClick={this.handleDialogToggle}
-          title="Select Multiple Artists"
+          title="Select 1 or More Artists"
           type="small"
         >
           <div style={{ maxHeight: '20em', overflow: 'auto' }}>

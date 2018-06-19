@@ -11,7 +11,11 @@ const Filters = props => {
         marginTop: '2.5em'
       }}
     >
-      <h5>Filters</h5>
+      <h3>Filters</h3>
+      <ArtistList
+        followings={props.followingsList}
+        setMultipleArtistsFilter={props.setMultipleArtistsFilter}
+      />
       <FilterByInput
         value={props.filters.byTrackName}
         action={props.setTrackNameFilter}
@@ -27,23 +31,6 @@ const Filters = props => {
         action={props.setGenreFilter}
         label="By Genre"
       />
-      <ArtistList
-        followings={props.followingsList}
-        setMultipleArtistsFilter={props.setMultipleArtistsFilter}
-      />
-      {/* <Input
-        className="multiselect"
-        type="select"
-        multiple
-        placeholder="Select Multiple Artists"
-        onChange={e => console.log(e.target.value)}
-      >
-        {props.followingsList.map((item, idx) => (
-          <option key={idx} value={item.username}>
-            {item.username}
-          </option>
-        ))}
-      </Input> */}
     </div>
   );
 };
