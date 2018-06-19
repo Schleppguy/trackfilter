@@ -38,7 +38,7 @@ export const scGetPlayer = track => {
 };
 
 export const scGetFollowings = user => {
-  return SC.get(`/users/${user}/followings`, { limit: 500 }).then(followings =>
+  return SC.get(`/users/${user}/followings`, { limit: 200 }).then(followings =>
     _.sortBy(followings.collection, ['username'])
   );
 };
@@ -47,10 +47,8 @@ export const scGetMyFollowings = () => {
   if (process.env.NODE_ENV === 'development') {
     return scGetFollowings(DEFAULT_USER_ID);
   } else {
-    return SC.connect()
-      .then(() => {
-        return SC.get('/me/followings', { limit: 500 });
-      })
-      .then(followings => _.sortBy(followings.collection, ['username']));
+    return SC.get('/me/followings', { limit: 200 }).then(followings =>
+      _.sortBy(followings.collection, ['username'])
+    );
   }
 };

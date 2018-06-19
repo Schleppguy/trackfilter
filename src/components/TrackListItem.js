@@ -42,7 +42,7 @@ class TrackListItem extends React.Component {
             <Avatar title={track.user.username} image={track.user.avatar_url} />
             <p style={{ marginLeft: '0.5em', fontSize: 'small' }}>
               <strong>{track.user.username}</strong> posted this track{' '}
-              {moment(track.created_at).from(moment())}
+              {moment(Date.parse(track.created_at)).from(moment())}
             </p>
           </div>
           {track.genre && (

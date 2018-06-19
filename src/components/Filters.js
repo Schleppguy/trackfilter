@@ -1,5 +1,6 @@
 import React from 'react';
 import FilterByInput from './FilterByInput';
+import { Input } from 'react-materialize';
 
 const Filters = props => {
   return (
@@ -20,6 +21,18 @@ const Filters = props => {
         action={props.setGenreFilter}
         label="By Genre"
       />
+      <Input
+        type="select"
+        multiple
+        placeholder="Select Multiple Artists"
+        onChange={e => console.log(e.target.value)}
+      >
+        {props.followingsList.map((item, idx) => (
+          <option key={idx} value={item.username}>
+            {item.username}
+          </option>
+        ))}
+      </Input>
     </div>
   );
 };

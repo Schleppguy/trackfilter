@@ -5,6 +5,11 @@ export const addFun = createAction('ADD_FUN');
 export const appendNewTracks = createAction('APPEND_NEW_TRACKS');
 export const newTracksAppended = createAction('NEW_TRACKS_APPENDED');
 export const newTracksAppendFailed = createAction('NEW_TRACKS_APPEND_FAILED');
+export const appendNewFollowings = createAction('APPEND_NEW_FOLLOWINGS');
+export const newFollowingsAppended = createAction('NEW_FOLLOWINGS_APPENDED');
+export const newFollowingsAppendFailed = createAction(
+  'NEW_FOLLOWINGS_APPEND_FAILED'
+);
 export const setTrackNameFilter = createAction('SET_TRACK_NAME_FILTER');
 export const setArtistNameFilter = createAction('SET_ARTIST_NAME_FILTER');
 export const setGenreFilter = createAction('SET_GENRE_FILTER');
@@ -27,13 +32,21 @@ export const getNewTracks = () => {
 };
 
 export const getMyFollowings = () => {
-  return scGetMyFollowings();
+  return dispatch => {
+    dispatch(appendNewFollowings());
+    scGetMyFollowings().then(followings =>
+      dispatch(newFollowingsAppended(followings)).catch(error =>
+        dispatch(newFollowingsAppendFailed(error))
+      )
+    );
+  };
 };
 
 export const startSession = () => {
   return dispatch => {
     scAuth().then(session => {
       dispatch(getNewTracks());
+      dispatch(getMyFollowings());
     });
   };
 };

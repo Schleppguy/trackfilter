@@ -8,8 +8,10 @@ import Filters from '../components/Filters';
 
 const mapStateToProps = state => {
   const { filters } = state.client;
+  const { followingsList } = state.followings;
   return {
-    filters
+    filters,
+    followingsList
   };
 };
 
