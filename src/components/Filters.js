@@ -1,6 +1,7 @@
 import React from 'react';
 import FilterByInput from './FilterByInput';
 import ArtistList from './ArtistList';
+import Duration from './Duration';
 
 const Filters = props => {
   return (
@@ -21,16 +22,17 @@ const Filters = props => {
         action={props.setTrackNameFilter}
         label="By Track Name"
       />
-      <FilterByInput
+      {/* <FilterByInput
         value={props.filters.byArtistName}
         action={props.setArtistNameFilter}
         label="By Artist Name"
-      />
+      /> */}
       <FilterByInput
         value={props.filters.byGenre}
         action={props.setGenreFilter}
         label="By Genre"
       />
+      <Duration />
     </div>
   );
 };
