@@ -3,7 +3,6 @@ import playerStyle from '../styles/playerStyle';
 import TrackTime from '../containers/TrackTime';
 import PlayLoad from '../containers/PlayLoad';
 import IconButton from 'react-toolbox/lib/button/IconButton';
-// import Slider from 'react-toolbox/lib/slider/Slider';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -27,14 +26,23 @@ const Player = props => {
         style={playerStyle.artwork}
         alt={`${track.user.username}: ${track.title}`}
       />
-      <p style={{ fontSize: 'small', marginLeft: '1em' }}>
-        <strong>
-          {track.user.username}: {track.title}
-        </strong>
-      </p>
+      <div
+        style={{
+          fontSize: 'small',
+          marginLeft: '1em',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-around'
+        }}
+      >
+        <div style={{ color: 'gray' }}>{track.user.username}</div>
+        <div>
+          <strong>{track.title}</strong>
+        </div>
+      </div>
     </div>
   ) : (
-    <div>Player is empty</div>
+    <div style={{ height: '2.5em', paddingTop: '0.5em' }}>Player is empty</div>
   );
 
   return (
@@ -52,14 +60,13 @@ const Player = props => {
               </div>
               <div style={playerStyle.volume}>
                 <IconButton
-                  style={{ width: '10%' }}
                   icon={currentVolume === 0 ? 'volume_off' : 'volume_up'}
                   disabled={disabled}
                   accent
                   onClick={toggleMute}
                 />
                 <Slider
-                  style={{ width: '80%' }}
+                  style={{ width: '70%', marginLeft: '0.5em' }}
                   value={currentVolume}
                   max={100}
                   disabled={disabled}

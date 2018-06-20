@@ -37,16 +37,24 @@ class TrackListItem extends React.Component {
       <Card style={{ marginTop: '0.5em', width: '90%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div
-            style={{ display: 'flex', alignItems: 'baseline', margin: '0.5em' }}
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              margin: '0.5em'
+            }}
           >
-            <Avatar title={track.user.username} image={track.user.avatar_url} />
+            <Avatar
+              style={{ marginRight: '0.5em' }}
+              title={track.user.username}
+              image={track.user.avatar_url}
+            />
             <p style={{ marginLeft: '0.5em', fontSize: 'small' }}>
               <strong>{track.user.username}</strong> posted this track{' '}
               {moment(Date.parse(track.created_at)).from(moment())}
             </p>
           </div>
           {track.genre && (
-            <Chip style={{ margin: '1em' }}>
+            <Chip style={{ margin: '1em', maxHeight: '2em' }}>
               <strong>{track.genre}</strong>
             </Chip>
           )}
@@ -68,9 +76,25 @@ class TrackListItem extends React.Component {
               marginRight: '1em'
             }}
           >
-            <div style={{ fontSize: 'small' }}>{track.user.username}</div>
+            <div style={{ fontSize: 'small' }}>
+              <a
+                href={track.user.permalink_url}
+                target="_blank"
+                rel="noopener"
+                style={{ textDecoration: 'none', color: 'gray' }}
+              >
+                {track.user.username}
+              </a>
+            </div>
             <div style={{ marginTop: '0.3em', fontSize: 'medium' }}>
-              <strong>{track.title}</strong>
+              <a
+                href={track.permalink_url}
+                target="_blank"
+                rel="noopener"
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <strong>{track.title}</strong>
+              </a>
             </div>
             <div
               style={{

@@ -25,6 +25,7 @@ export default {
   volume: {
     display: 'flex',
     width: '25%',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    marginRight: '2em'
   }
 };

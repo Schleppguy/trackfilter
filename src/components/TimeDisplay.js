@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { displayTime } from '../displayUtils';
-// import Slider from 'react-toolbox/lib/slider/Slider';
-import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -37,25 +35,22 @@ class TimeDisplay extends PureComponent {
       <div
         style={{
           display: 'flex',
-          // alignItems: 'baseline',
           justifyContent: 'space-between'
         }}
       >
         <div style={{ fontSize: 'small' }}>
           {displayTime(this.state.currentTime)}
         </div>
-        {loading ? (
-          <ProgressBar style={{ width: '85%' }} mode="indeterminate" />
-        ) : (
-          <Slider
-            style={{ width: '85%' }}
-            value={this.state.currentTime * 1000}
-            disabled={disabled}
-            max={duration ? duration * 1000 : 1}
-            onChange={this.handleTimeChange}
-          />
-        )}
-        <div style={{ fontSize: 'small' }}>{displayTime(duration)}</div>
+        <Slider
+          style={{ width: '85%', marginLeft: '1em' }}
+          value={this.state.currentTime * 1000}
+          disabled={disabled}
+          max={duration ? duration * 1000 : 1}
+          onChange={this.handleTimeChange}
+        />
+        <div style={{ fontSize: 'small', marginLeft: '1em' }}>
+          {displayTime(duration)}
+        </div>
       </div>
     );
   }
