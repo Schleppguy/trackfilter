@@ -9,7 +9,7 @@ class Duration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vals: [0, 120]
+      vals: [0, 360]
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -21,17 +21,18 @@ class Duration extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '1em' }}>
+      <div style={{ marginTop: '2em' }}>
         By Track Duration
         <Range
-          min={0}
-          max={120}
-          defaultValue={[0, 120]}
+          max={360}
+          defaultValue={[0, 360]}
           onChange={this.handleChange}
           style={{ marginTop: '1em' }}
         />
-        <p>> {this.state.vals[0]} minutes</p>
-        <p>{`< ${this.state.vals[1]} minutes`}</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <p>> {this.state.vals[0]} mins</p>
+          <p>{`< ${this.state.vals[1]} mins`}</p>
+        </div>
       </div>
     );
   }

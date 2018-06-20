@@ -60,7 +60,7 @@ export const loadTrackToPlayer = (track, volume) => {
     dispatch(loadTrack());
     scGetPlayer(track)
       .then(player => {
-        player.setVolume(volume);
+        player.setVolume(volume / 100);
         return player;
       })
       .then(player => {

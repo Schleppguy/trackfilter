@@ -3,7 +3,9 @@ import playerStyle from '../styles/playerStyle';
 import TrackTime from '../containers/TrackTime';
 import PlayLoad from '../containers/PlayLoad';
 import IconButton from 'react-toolbox/lib/button/IconButton';
-import Slider from 'react-toolbox/lib/slider/Slider';
+// import Slider from 'react-toolbox/lib/slider/Slider';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const Player = props => {
   const { track, currentVolume, audio, updateVolume, lastVolume } = props;
@@ -11,7 +13,7 @@ const Player = props => {
 
   const handleVolumeChange = v => {
     updateVolume(v);
-    audio.setVolume(v);
+    audio.setVolume(v / 100);
   };
 
   const toggleMute = () => {
@@ -59,7 +61,7 @@ const Player = props => {
                 <Slider
                   style={{ width: '80%' }}
                   value={currentVolume}
-                  max={1}
+                  max={100}
                   disabled={disabled}
                   onChange={handleVolumeChange}
                 />

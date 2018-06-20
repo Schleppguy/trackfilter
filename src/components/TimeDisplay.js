@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { displayTime } from '../displayUtils';
-import Slider from 'react-toolbox/lib/slider/Slider';
+// import Slider from 'react-toolbox/lib/slider/Slider';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class TimeDisplay extends PureComponent {
   constructor(props) {
@@ -24,7 +26,9 @@ class TimeDisplay extends PureComponent {
   }
 
   handleTimeChange(t) {
-    this.props.audio.seek(this.props.duration * t * 1000);
+    console.log(t);
+
+    this.props.audio.seek(t);
   }
 
   render() {
@@ -33,7 +37,7 @@ class TimeDisplay extends PureComponent {
       <div
         style={{
           display: 'flex',
-          alignItems: 'baseline',
+          // alignItems: 'baseline',
           justifyContent: 'space-between'
         }}
       >
@@ -41,13 +45,13 @@ class TimeDisplay extends PureComponent {
           {displayTime(this.state.currentTime)}
         </div>
         {loading ? (
-          <ProgressBar style={{ width: '90%' }} mode="indeterminate" />
+          <ProgressBar style={{ width: '85%' }} mode="indeterminate" />
         ) : (
           <Slider
-            style={{ width: '90%' }}
-            value={duration ? this.state.currentTime / duration : 0}
+            style={{ width: '85%' }}
+            value={this.state.currentTime * 1000}
             disabled={disabled}
-            max={1}
+            max={duration ? duration * 1000 : 1}
             onChange={this.handleTimeChange}
           />
         )}

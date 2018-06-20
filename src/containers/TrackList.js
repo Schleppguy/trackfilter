@@ -34,11 +34,8 @@ export const filterByMultipleArtists = (track, filters) => {
 };
 
 export const filterByDuration = (track, filters) => {
-  console.log(track.duration);
-  return (
-    track.duration > filters.byDuration[0] * 60 * 1000 &&
-    track.duration < filters.byDuration[1] * 60 * 1000
-  );
+  const duration = track.duration / 1000 / 60;
+  return duration > filters.byDuration[0] && duration < filters.byDuration[1];
 };
 
 const FILTER_LIST = [

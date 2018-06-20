@@ -12,7 +12,7 @@ const defaultState = {
   track: null,
   audio: null,
   isPlaying: false,
-  currentVolume: 1,
+  currentVolume: 100,
   lastVolume: 0,
   duration: 0,
   lastError: null

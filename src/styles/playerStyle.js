@@ -19,8 +19,8 @@ export default {
   controls: {
     display: 'flex',
     alignItems: 'baseline',
-    justifyContent: 'space-between',
-    paddingBottom: '0.5em'
+    justifyContent: 'space-between'
+    // paddingBottom: '0.5em'
   },
   volume: {
     display: 'flex',
