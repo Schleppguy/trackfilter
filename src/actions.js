@@ -16,6 +16,7 @@ export const setGenreFilter = createAction('SET_GENRE_FILTER');
 export const setMultipleArtistsFilter = createAction(
   'SET_MULTIPLE_ARTISTS_FILTER'
 );
+export const setDurationFilter = createAction('SET_DURATION_FILTER');
 export const loadTrack = createAction('LOAD_TRACK');
 export const trackLoaded = createAction('TRACK_LOADED');
 export const loadTrackFailed = createAction('LOAD_TRACK_FAILED');

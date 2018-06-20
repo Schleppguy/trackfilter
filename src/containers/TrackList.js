@@ -33,11 +33,20 @@ export const filterByMultipleArtists = (track, filters) => {
     : filters.byMultipleArtists.lastIndexOf(track.user.username) >= 0;
 };
 
+export const filterByDuration = (track, filters) => {
+  console.log(track.duration);
+  return (
+    track.duration > filters.byDuration[0] * 60 * 1000 &&
+    track.duration < filters.byDuration[1] * 60 * 1000
+  );
+};
+
 const FILTER_LIST = [
   filterByTrackName,
   filterByArtistName,
   filterByGenre,
-  filterByMultipleArtists
+  filterByMultipleArtists,
+  filterByDuration
 ];
 
 export const filterTrackList = (trackList, filters) => {

@@ -32,7 +32,7 @@ const Filters = props => {
         action={props.setGenreFilter}
         label="By Genre"
       />
-      <Duration />
+      <Duration setDurationFilter={props.setDurationFilter} />
     </div>
   );
 };

@@ -15,6 +15,7 @@ class Duration extends Component {
   }
 
   handleChange(vals) {
+    this.props.setDurationFilter(vals);
     this.setState({ vals });
   }
 
@@ -29,8 +30,8 @@ class Duration extends Component {
           onChange={this.handleChange}
           style={{ marginTop: '1em' }}
         />
-        <p>Greater than: {this.state.vals[0]} minutes</p>
-        <p>Less than: {this.state.vals[1]} minutes</p>
+        <p>> {this.state.vals[0]} minutes</p>
+        <p>{`< ${this.state.vals[1]} minutes`}</p>
       </div>
     );
   }

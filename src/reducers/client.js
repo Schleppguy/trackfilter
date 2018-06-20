@@ -3,7 +3,8 @@ import {
   setTrackNameFilter,
   setArtistNameFilter,
   setGenreFilter,
-  setMultipleArtistsFilter
+  setMultipleArtistsFilter,
+  setDurationFilter
 } from '../actions';
 
 const defaultState = {
@@ -11,7 +12,8 @@ const defaultState = {
     byTrackName: '',
     byArtistName: '',
     byGenre: '',
-    byMultipleArtists: []
+    byMultipleArtists: [],
+    byDuration: [0, 120]
   }
 };
 
@@ -32,6 +34,10 @@ const client = handleActions(
     [setMultipleArtistsFilter]: (state, { payload }) => ({
       ...state,
       filters: { ...state.filters, byMultipleArtists: payload }
+    }),
+    [setDurationFilter]: (state, { payload }) => ({
+      ...state,
+      filters: { ...state.filters, byDuration: payload }
     })
   },
   defaultState
