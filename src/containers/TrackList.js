@@ -15,11 +15,11 @@ export const filterByTrackName = (track, filters) => {
     : isIncluded(track.title, filters.byTrackName);
 };
 
-export const filterByArtistName = (track, filters) => {
-  return filters.byArtistName === ''
-    ? true
-    : isIncluded(track.user.username, filters.byArtistName);
-};
+// export const filterByArtistName = (track, filters) => {
+//   return filters.byArtistName === ''
+//     ? true
+//     : isIncluded(track.user.username, filters.byArtistName);
+// };
 
 export const filterByGenre = (track, filters) => {
   return filters.byGenre === ''
@@ -40,7 +40,7 @@ export const filterByDuration = (track, filters) => {
 
 const FILTER_LIST = [
   filterByTrackName,
-  filterByArtistName,
+  // filterByArtistName,
   filterByGenre,
   filterByMultipleArtists,
   filterByDuration

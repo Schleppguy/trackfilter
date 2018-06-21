@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { render } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import TrackListItem from '../../components/TrackListItem';
@@ -9,12 +9,22 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('<TrackListItem />', () => {
   it('should render the track title', () => {
-    const wrapper = render(<TrackListItem track={exampleTracks[1]} />);
-    expect(wrapper.find('h5').text()).toBe('Total Mass Retain');
+    const wrapper = shallow(<TrackListItem track={exampleTracks[1]} />);
+    expect(
+      wrapper
+        .find('a')
+        .at(1)
+        .text()
+    ).toBe('Total Mass Retain');
   });
 
   it('should render the artist name', () => {
-    const wrapper = render(<TrackListItem track={exampleTracks[1]} />);
-    expect(wrapper.find('p').text()).toBe('kikipopo');
+    const wrapper = shallow(<TrackListItem track={exampleTracks[1]} />);
+    expect(
+      wrapper
+        .find('a')
+        .at(0)
+        .text()
+    ).toBe('kikipopo');
   });
 });

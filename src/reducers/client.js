@@ -7,10 +7,10 @@ import {
   setDurationFilter
 } from '../actions';
 
-const defaultState = {
+export const defaultState = {
   filters: {
     byTrackName: '',
-    byArtistName: '',
+    // byArtistName: '',
     byGenre: '',
     byMultipleArtists: [],
     byDuration: [0, 120]
