@@ -48,10 +48,12 @@ export const getMyFollowings = () => {
 
 export const startSession = () => {
   return dispatch => {
-    scAuth().then(session => {
-      dispatch(getNewTracks());
-      dispatch(getMyFollowings());
-    });
+    scAuth()
+      .then(session => {
+        dispatch(getNewTracks());
+        dispatch(getMyFollowings());
+      })
+      .catch(error => console.error(error));
   };
 };
 
