@@ -11,26 +11,26 @@ SC.initialize({
 export const scAuth = () => {
   return process.env.NODE_ENV === 'development'
     ? new Promise(resolve => resolve('development'))
-    : SC.connect();
+    : SC.connect().then(session => {
+        console.log(session);
+      });
 };
 
 export const scGetTracks = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return SC.get(`/users/${DEFAULT_USER_ID}/favorites`);
-  } else {
-    return SC.get('/me/activities/tracks/affiliated', {
-      limit: 200,
-      streamable: true
-    }).then(tracks => {
-      return _.map(
-        _.filter(
-          tracks.collection,
-          o => o.type === 'track' && !_.isNull(o.origin)
-        ),
-        'origin'
-      );
-    });
-  }
+  return process.env.NODE_ENV === 'development'
+    ? SC.get(`/users/${DEFAULT_USER_ID}/favorites`)
+    : SC.get('/me/activities/tracks/affiliated', {
+        limit: 200,
+        streamable: true
+      }).then(tracks => {
+        return _.map(
+          _.filter(
+            tracks.collection,
+            o => o.type === 'track' && !_.isNull(o.origin)
+          ),
+          'origin'
+        );
+      });
 };
 
 export const scGetPlayer = track => {
