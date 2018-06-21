@@ -5,11 +5,11 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../../build')));
 
 app.get('/feed', function(req, res) {
+  console.log(req.params);
   res.sendFile(path.join(__dirname, '../../build/feed', 'index.html'));
 });
 
 app.get('/', function(req, res) {
-  console.log(req);
   res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
