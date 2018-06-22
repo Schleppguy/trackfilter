@@ -50,7 +50,7 @@ export const startSession = () => {
   return dispatch => {
     scAuth()
       .then(session => {
-        dispatch(getNewTracks(''));
+        dispatch(getNewTracks(null));
         dispatch(getMyFollowings());
       })
       .catch(error => console.error(error));
