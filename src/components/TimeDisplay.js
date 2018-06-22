@@ -24,8 +24,6 @@ class TimeDisplay extends PureComponent {
   }
 
   handleTimeChange(t) {
-    console.log(t);
-
     this.props.audio.seek(t);
   }
 

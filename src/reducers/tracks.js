@@ -8,6 +8,7 @@ import {
 const defaultState = {
   loading: false,
   trackList: [],
+  cursor: '',
   lastError: null
 };
 

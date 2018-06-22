@@ -8,6 +8,12 @@ SC.initialize({
   redirect_uri: process.env.REACT_APP_REDIRECT_URI
 });
 
+export const getCursor = nextHref => {
+  return nextHref === null
+    ? nextHref
+    : nextHref.split('cursor=')[0].split('&')[0];
+};
+
 export const scAuth = () => {
   return process.env.NODE_ENV === 'development'
     ? new Promise(resolve => resolve('development'))

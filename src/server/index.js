@@ -12,7 +12,6 @@ app.get('/feed', function(req, res) {
       );
     }
   });
-  //res.sendFile(path.join(__dirname, '../../build/feed', 'index.html'));
 });
 
 app.get('/', function(req, res) {
