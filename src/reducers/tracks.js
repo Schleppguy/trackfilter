@@ -8,7 +8,7 @@ import {
 const defaultState = {
   loading: false,
   trackList: [],
-  cursor: '',
+  cursor: null,
   lastError: null
 };
 
