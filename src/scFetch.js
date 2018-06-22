@@ -9,6 +9,9 @@ SC.initialize({
 });
 
 export const getCursor = nextHref => {
+  console.log('nextHref', nextHref);
+  console.log(nextHref.split('cursor=')[0].split('&')[0]);
+
   return nextHref === null
     ? nextHref
     : nextHref.split('cursor=')[0].split('&')[0];
@@ -48,8 +51,8 @@ export const scGetTracks = cursor => {
           ),
           'origin'
         );
-        const cursor = getCursor(tracks.next_href);
-        return { collection, cursor };
+        const nextHref = getCursor(tracks.next_href);
+        return { collection, cursor: nextHref };
       });
 };
 
