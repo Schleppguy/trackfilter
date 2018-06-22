@@ -24,10 +24,10 @@ export const togglePlay = createAction('TOGGLE_PLAY');
 export const updateVolume = createAction('UPDATE_VOLUME');
 
 // async
-export const getNewTracks = () => {
+export const getNewTracks = cursor => {
   return dispatch => {
     dispatch(appendNewTracks());
-    scGetTracks().then(tracks =>
+    scGetTracks(cursor).then(tracks =>
       dispatch(newTracksAppended(tracks)).catch(error =>
         dispatch(newTracksAppendFailed(error))
       )
@@ -50,7 +50,7 @@ export const startSession = () => {
   return dispatch => {
     scAuth()
       .then(session => {
-        dispatch(getNewTracks());
+        dispatch(getNewTracks(''));
         dispatch(getMyFollowings());
       })
       .catch(error => console.error(error));

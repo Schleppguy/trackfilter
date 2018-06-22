@@ -20,6 +20,12 @@ class ArtistList extends Component {
     this.updateSelectedArtists = this.updateSelectedArtists.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.cursor !== prevProps.cursor && this.props.cursor !== null) {
+      //call the thing
+    }
+  }
+
   handleDialogToggle() {
     this.setState({ dialogActive: !this.state.dialogActive });
   }

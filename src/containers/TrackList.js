@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { startSession } from '../actions';
+import { startSession, getNewTracks } from '../actions';
 import ViewableTrackList from '../components/ViewableTrackList';
 import _ from 'lodash';
 
@@ -53,17 +53,20 @@ export const filterTrackList = (trackList, filters) => {
 };
 
 const mapStateToProps = state => {
-  const { trackList, loading } = state.tracks;
+  const { trackList, cursor, loading } = state.tracks;
   const { filters } = state.client;
   return {
-    trackList: filterTrackList(trackList, filters),
+    viewableTrackList: filterTrackList(trackList, filters),
+    trackList,
+    cursor,
     loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    startSession: () => dispatch(startSession())
+    startSession: () => dispatch(startSession()),
+    getNewTracks: cursor => dispatch(getNewTracks(cursor))
   };
 };
 

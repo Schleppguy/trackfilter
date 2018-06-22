@@ -20,7 +20,8 @@ const tracks = handleActions(
     }),
     [newTracksAppended]: (state, { payload }) => ({
       ...state,
-      trackList: state.trackList.concat(payload),
+      trackList: state.trackList.concat(payload.collection),
+      cursor: payload.cursor,
       loading: false
     }),
     [newTracksAppendFailed]: (state, { payload }) => ({

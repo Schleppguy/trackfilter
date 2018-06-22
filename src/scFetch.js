@@ -22,20 +22,28 @@ export const scAuth = () => {
       });
 };
 
-export const scGetTracks = () => {
+export const scGetTracks = cursor => {
   return process.env.NODE_ENV === 'development'
-    ? SC.get(`/users/${DEFAULT_USER_ID}/favorites`)
+    ? SC.get(`/users/${DEFAULT_USER_ID}/favorites`).then(tracks => {
+        return {
+          collection: tracks,
+          cursor: null
+        };
+      })
     : SC.get('/me/activities/tracks/affiliated', {
         limit: 200,
-        streamable: true
+        streamable: true,
+        cursor
       }).then(tracks => {
-        return _.map(
+        const collection = _.map(
           _.filter(
             tracks.collection,
             o => o.type === 'track' && !_.isNull(o.origin)
           ),
           'origin'
         );
+        const cursor = getCursor(tracks.next_href);
+        return { collection, cursor };
       });
 };
 
@@ -44,16 +52,17 @@ export const scGetPlayer = track => {
 };
 
 export const scGetFollowings = user => {
-  return SC.get(`/users/${user}/followings`, { limit: 200 }).then(followings =>
-    _.sortBy(followings.collection, [o => o.username.toLowerCase()])
-  );
+  return SC.get(`/users/${user}/followings`).then(followings => {
+    console.log(followings.next_href);
+    return _.sortBy(followings.collection, [o => o.username.toLowerCase()]);
+  });
 };
 
 export const scGetMyFollowings = () => {
   if (process.env.NODE_ENV === 'development') {
     return scGetFollowings(DEFAULT_USER_ID);
   } else {
-    return SC.get('/me/followings', { limit: 200 }).then(followings =>
+    return SC.get('/me/followings').then(followings =>
       _.sortBy(followings.collection, [o => o.username.toLowerCase()])
     );
   }
