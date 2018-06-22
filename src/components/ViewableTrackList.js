@@ -6,7 +6,7 @@ import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 class ViewableTrackList extends Component {
   componentDidUpdate(prevProps) {
     if (
-      this.props.trackList.length < 1000 &&
+      this.props.trackList.length < 500 &&
       this.props.cursor !== prevProps.cursor &&
       this.props.cursor !== null
     ) {
