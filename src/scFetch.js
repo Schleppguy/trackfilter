@@ -10,11 +10,11 @@ SC.initialize({
 
 export const getCursor = nextHref => {
   console.log('nextHref', nextHref);
-  console.log(nextHref.split('cursor=')[0].split('&')[0]);
+  console.log(nextHref.split('cursor=')[1].split('&')[0]);
 
   return nextHref === null
     ? nextHref
-    : nextHref.split('cursor=')[0].split('&')[0];
+    : nextHref.split('cursor=')[1].split('&')[0];
 };
 
 export const scAuth = () => {
