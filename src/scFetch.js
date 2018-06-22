@@ -23,6 +23,16 @@ export const scAuth = () => {
 };
 
 export const scGetTracks = cursor => {
+  const options = cursor
+    ? {
+        limit: 200,
+        streamable: true,
+        cursor
+      }
+    : {
+        limit: 200,
+        streamable: true
+      };
   return process.env.NODE_ENV === 'development'
     ? SC.get(`/users/${DEFAULT_USER_ID}/favorites`).then(tracks => {
         return {
@@ -30,11 +40,7 @@ export const scGetTracks = cursor => {
           cursor: null
         };
       })
-    : SC.get('/me/activities/tracks/affiliated', {
-        limit: 200,
-        streamable: true,
-        cursor
-      }).then(tracks => {
+    : SC.get('/me/activities/tracks/affiliated', options).then(tracks => {
         const collection = _.map(
           _.filter(
             tracks.collection,
