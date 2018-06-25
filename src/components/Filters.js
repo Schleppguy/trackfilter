@@ -27,7 +27,9 @@ const Filters = props => {
         <div style={{ marginBottom: '1em' }}>
           <ArtistList
             followings={props.followingsList}
+            cursor={props.cursor}
             setMultipleArtistsFilter={props.setMultipleArtistsFilter}
+            getMyFollowings={props.getMyFollowings}
           />
           <ListDivider />
         </div>

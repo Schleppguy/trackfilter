@@ -8,7 +8,6 @@ import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
 import TrackList from '../containers/TrackList';
 import SCPlayer from '../containers/SCPlayer';
 import ClientFilters from '../containers/ClientFilters';
-// import FunButton from '../containers/FunButton';
 
 class PrimaryLayout extends Component {
   constructor(props) {

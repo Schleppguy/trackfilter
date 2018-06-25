@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { displayTime } from '../displayUtils';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-class TimeDisplay extends PureComponent {
+class TimeDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,15 +1,19 @@
 import { createAction } from 'redux-actions';
 import { scGetTracks, scGetPlayer, scAuth, scGetMyFollowings } from './scFetch';
 
-export const addFun = createAction('ADD_FUN');
+//Tracks
 export const appendNewTracks = createAction('APPEND_NEW_TRACKS');
 export const newTracksAppended = createAction('NEW_TRACKS_APPENDED');
 export const newTracksAppendFailed = createAction('NEW_TRACKS_APPEND_FAILED');
+
+//Followings
 export const appendNewFollowings = createAction('APPEND_NEW_FOLLOWINGS');
 export const newFollowingsAppended = createAction('NEW_FOLLOWINGS_APPENDED');
 export const newFollowingsAppendFailed = createAction(
   'NEW_FOLLOWINGS_APPEND_FAILED'
 );
+
+//Filters
 export const setTrackNameFilter = createAction('SET_TRACK_NAME_FILTER');
 export const setArtistNameFilter = createAction('SET_ARTIST_NAME_FILTER');
 export const setGenreFilter = createAction('SET_GENRE_FILTER');
@@ -17,6 +21,8 @@ export const setMultipleArtistsFilter = createAction(
   'SET_MULTIPLE_ARTISTS_FILTER'
 );
 export const setDurationFilter = createAction('SET_DURATION_FILTER');
+
+//Player
 export const loadTrack = createAction('LOAD_TRACK');
 export const trackLoaded = createAction('TRACK_LOADED');
 export const loadTrackFailed = createAction('LOAD_TRACK_FAILED');
@@ -35,10 +41,10 @@ export const getNewTracks = cursor => {
   };
 };
 
-export const getMyFollowings = () => {
+export const getMyFollowings = cursor => {
   return dispatch => {
     dispatch(appendNewFollowings());
-    scGetMyFollowings().then(followings =>
+    scGetMyFollowings(cursor).then(followings =>
       dispatch(newFollowingsAppended(followings)).catch(error =>
         dispatch(newFollowingsAppendFailed(error))
       )
@@ -51,7 +57,7 @@ export const startSession = () => {
     scAuth()
       .then(session => {
         dispatch(getNewTracks(null));
-        dispatch(getMyFollowings());
+        dispatch(getMyFollowings(null));
       })
       .catch(error => console.error(error));
   };

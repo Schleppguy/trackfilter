@@ -22,7 +22,7 @@ class ArtistList extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.cursor !== prevProps.cursor && this.props.cursor !== null) {
-      //call the thing
+      this.props.getMyFollowings(this.props.cursor);
     }
   }
 

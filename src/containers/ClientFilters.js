@@ -4,16 +4,18 @@ import {
   setArtistNameFilter,
   setGenreFilter,
   setMultipleArtistsFilter,
-  setDurationFilter
+  setDurationFilter,
+  getMyFollowings
 } from '../actions';
 import Filters from '../components/Filters';
 
 const mapStateToProps = state => {
   const { filters } = state.client;
-  const { followingsList } = state.followings;
+  const { followingsList, cursor } = state.followings;
   return {
     filters,
-    followingsList
+    followingsList,
+    cursor
   };
 };
 
@@ -24,7 +26,8 @@ const mapDispatchToProps = dispatch => {
     setGenreFilter: input => dispatch(setGenreFilter(input)),
     setMultipleArtistsFilter: array =>
       dispatch(setMultipleArtistsFilter(array)),
-    setDurationFilter: array => dispatch(setDurationFilter(array))
+    setDurationFilter: array => dispatch(setDurationFilter(array)),
+    getMyFollowings: cursor => dispatch(getMyFollowings(cursor))
   };
 };
 

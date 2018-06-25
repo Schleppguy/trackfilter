@@ -4,10 +4,12 @@ import {
   newFollowingsAppended,
   newFollowingsAppendFailed
 } from '../actions';
+import _ from 'lodash';
 
 const defaultState = {
   loading: false,
   followingsList: [],
+  cursor: null,
   lastError: null
 };
 
@@ -19,7 +21,11 @@ const followings = handleActions(
     }),
     [newFollowingsAppended]: (state, { payload }) => ({
       ...state,
-      followingsList: state.followingsList.concat(payload),
+      followingsList: _.sortBy(
+        state.followingsList.concat(payload.collection),
+        [o => o.username.toLowerCase()]
+      ),
+      cursor: payload.cursor,
       loading: false
     }),
     [newFollowingsAppendFailed]: (state, { payload }) => ({

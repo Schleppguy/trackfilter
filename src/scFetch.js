@@ -9,9 +9,6 @@ SC.initialize({
 });
 
 export const getCursor = nextHref => {
-  console.log('nextHref', nextHref);
-  console.log(nextHref.split('cursor=')[1].split('&')[0]);
-
   return nextHref === null
     ? nextHref
     : nextHref.split('cursor=')[1].split('&')[0];
@@ -51,19 +48,25 @@ export const scGetPlayer = track => {
   return SC.stream(`/tracks/${track.id}`);
 };
 
-export const scGetFollowings = user => {
-  return SC.get(`/users/${user}/followings`).then(followings => {
-    console.log(followings.next_href);
-    return _.sortBy(followings.collection, [o => o.username.toLowerCase()]);
-  });
+export const scGetFollowings = (user, options) => {
+  return SC.get(`/users/${user}/followings`, options);
 };
 
-export const scGetMyFollowings = () => {
+export const scGetMyFollowings = cursor => {
+  const options = cursor ? { limit: 100, cursor } : { limit: 100 };
   if (process.env.NODE_ENV === 'development') {
-    return scGetFollowings(DEFAULT_USER_ID);
+    return scGetFollowings(DEFAULT_USER_ID, options).then(followings => {
+      return {
+        collection: followings.collection,
+        cursor: getCursor(followings.next_href)
+      };
+    });
   } else {
-    return SC.get('/me/followings').then(followings =>
-      _.sortBy(followings.collection, [o => o.username.toLowerCase()])
-    );
+    return SC.get('/me/followings', options).then(followings => {
+      return {
+        collection: followings.collection,
+        cursor: getCursor(followings.next_href)
+      };
+    });
   }
 };
