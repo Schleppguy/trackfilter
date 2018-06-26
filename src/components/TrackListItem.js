@@ -1,13 +1,62 @@
 import React from 'react';
 import { displayTime } from '../displayUtils';
 import PlayLoad from '../containers/PlayLoad';
-import Card from 'react-toolbox/lib/card/Card';
-import Avatar from 'react-toolbox/lib/avatar/Avatar';
-import Chip from 'react-toolbox/lib/chip/Chip';
 import Button from 'react-toolbox/lib/button/Button';
 import moment from 'moment';
-import CardText from 'react-toolbox/lib/card/CardText';
-import CardActions from 'react-toolbox/lib/card/CardActions';
+import classnames from 'classnames';
+
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+// import Chip from '@material-ui/core/Chip';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import red from '@material-ui/core/colors/red';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+const styles = theme => ({
+  card: {
+    maxWidth: 800,
+    marginTop: '1em'
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // 16:9
+  },
+  actions: {
+    display: 'flex'
+  },
+  actionButton: {
+    height: 20,
+    width: 20
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    }),
+    marginLeft: 'auto'
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  avatar: {
+    height: 30,
+    width: 30
+  }
+  // chip: {
+  //   margin: theme.spacing.unit,
+  //   maxWidth: 200
+  // }
+});
 
 class TrackListItem extends React.Component {
   constructor(props) {
@@ -29,40 +78,43 @@ class TrackListItem extends React.Component {
   }
 
   render() {
-    const { track } = this.props;
+    const { track, classes } = this.props;
     const artwork = track.artwork_url
       ? track.artwork_url
       : track.user.avatar_url;
     return (
-      <Card style={{ marginTop: '0.5em', maxWidth: '850px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'baseline',
-              margin: '0.5em'
-            }}
-          >
-            <Avatar
-              style={{ marginRight: '0.5em' }}
-              title={track.user.username}
-              image={track.user.avatar_url}
-            />
-            <p style={{ marginLeft: '0.5em', fontSize: 'small' }}>
-              <strong>{track.user.username}</strong> posted this track{' '}
-              {moment(Date.parse(track.created_at)).from(moment())}
-            </p>
-          </div>
-          {track.genre && (
-            <Chip style={{ margin: '1em', maxHeight: '2em' }}>
-              <strong>{track.genre}</strong>
-            </Chip>
-          )}
-        </div>
+      <Card className={classes.card}>
+        <CardHeader
+          className={classes.cardHeader}
+          avatar={
+            <Avatar src={track.user.avatar_url} alt={track.user.username} />
+          }
+          // action={
+          //   track.genre && <Chip label={track.genre} className={classes.chip} />
+          // }
+          title={
+            <a
+              href={track.user.permalink_url}
+              target="_blank"
+              rel="noopener"
+              style={{ textDecoration: 'none' }}
+            >
+              <Typography variant="subheading" color="textSecondary">
+                {track.user.username}
+              </Typography>
+            </a>
+          }
+          subheader={
+            <Typography variant="caption">{`Posted ${moment(
+              Date.parse(track.created_at)
+            ).from(moment())}`}</Typography>
+          }
+        />
+
         <div style={{ display: 'flex', width: '100%' }}>
           <img
             src={this.formatArtwork(artwork)}
-            style={{ height: '8em', width: '8em' }}
+            style={{ height: '6em', width: '6em', marginLeft: '1em' }}
             alt={`${track.user.username}: ${track.title}`}
           />
           <div style={{ width: '5em', marginTop: '0.5em' }}>
@@ -76,60 +128,49 @@ class TrackListItem extends React.Component {
               marginRight: '1em'
             }}
           >
-            <div style={{ fontSize: 'small' }}>
-              <a
-                href={track.user.permalink_url}
-                target="_blank"
-                rel="noopener"
-                style={{ textDecoration: 'none', color: 'gray' }}
-              >
-                {track.user.username}
-              </a>
-            </div>
-            <div style={{ marginTop: '0.3em', fontSize: 'medium' }}>
+            <div>
               <a
                 href={track.permalink_url}
                 target="_blank"
                 rel="noopener"
                 style={{ textDecoration: 'none', color: 'black' }}
               >
-                <strong>{track.title}</strong>
+                <Typography variant="title">{track.title}</Typography>
               </a>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                marginTop: '2em',
-                alignItems: 'center'
-              }}
-            >
-              <div>Duration: {displayTime(track.duration / 1000)}</div>
-            </div>
+
+            <Typography variant="body2" color="textSecondary">
+              Genre: {track.genre ? track.genre : 'none'}
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Duration: {displayTime(track.duration / 1000)}
+            </Typography>
           </div>
         </div>
-        {this.state.showDescription && (
-          <CardText>
+        <CardActions className={classes.actions}>
+          <IconButton
+            className={classnames(classes.expand, classes.actionButton, {
+              [classes.expandOpen]: this.state.showDescription
+            })}
+            onClick={this.toggleDescription}
+            aria-expanded={this.state.showDescription}
+            aria-label="Show description"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={this.state.showDescription} timeout="auto" unmountOnExit>
+          <CardContent>
             {track.description
               ? track.description
                   .split('\n')
                   .map((line, i) => <p key={i}>{line}</p>)
-              : ''}
-          </CardText>
-        )}
-        <CardActions>
-          <Button
-            icon={this.state.showDescription ? 'remove' : 'add'}
-            label={
-              this.state.showDescription
-                ? 'Hide Description'
-                : 'Show Description'
-            }
-            onClick={this.toggleDescription}
-          />
-        </CardActions>
+              : 'No description'}
+          </CardContent>
+        </Collapse>
       </Card>
     );
   }
 }
 
-export default TrackListItem;
+export default withStyles(styles)(TrackListItem);

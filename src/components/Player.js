@@ -1,10 +1,15 @@
 import React from 'react';
-import playerStyle from '../styles/playerStyle';
+
 import TrackTime from '../containers/TrackTime';
 import PlayLoad from '../containers/PlayLoad';
-import IconButton from 'react-toolbox/lib/button/IconButton';
+
+import IconButton from '@material-ui/core/IconButton';
+import VolumeIcon from '@material-ui/icons/VolumeUp';
+import MuteIcon from '@material-ui/icons/VolumeOff';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import playerStyle from '../styles/playerStyle';
+import { Typography } from '@material-ui/core';
 
 const Player = props => {
   const { track, currentVolume, audio, updateVolume, lastVolume } = props;
@@ -35,14 +40,14 @@ const Player = props => {
           justifyContent: 'space-around'
         }}
       >
-        <div style={{ color: 'gray' }}>{track.user.username}</div>
-        <div>
-          <strong>{track.title}</strong>
-        </div>
+        <Typography variant="body1" color="textSecondary">
+          {track.user.username}
+        </Typography>
+        <Typography variant="body1">{track.title}</Typography>
       </div>
     </div>
   ) : (
-    <div style={{ height: '2.5em', paddingTop: '0.5em' }}>Player is empty</div>
+    <div style={{ height: '2em', paddingTop: '0.5em' }}>Player is empty</div>
   );
 
   return (
@@ -55,18 +60,20 @@ const Player = props => {
           {trackInfo}
           <div>
             <div style={playerStyle.controls}>
-              <div style={{ width: '70%' }}>
+              <div style={{ flexGrow: 2, marginTop: '1em' }}>
                 <TrackTime disabled={disabled} />
               </div>
               <div style={playerStyle.volume}>
                 <IconButton
-                  icon={currentVolume === 0 ? 'volume_off' : 'volume_up'}
+                  style={{ flexGrow: 1 }}
                   disabled={disabled}
-                  accent
+                  color="secondary"
                   onClick={toggleMute}
-                />
+                >
+                  {currentVolume === 0 ? <MuteIcon /> : <VolumeIcon />}
+                </IconButton>
                 <Slider
-                  style={{ width: '70%', marginLeft: '0.5em' }}
+                  style={{ marginTop: '1em' }}
                   value={currentVolume}
                   max={100}
                   disabled={disabled}

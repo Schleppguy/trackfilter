@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TrackListItem from './TrackListItem';
 import SCButton from './SCButton';
-import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class ViewableTrackList extends Component {
   componentDidUpdate(prevProps) {
@@ -24,7 +24,7 @@ class ViewableTrackList extends Component {
         <SCButton startSession={startSession} />
         {loading ? (
           <div style={{ marginTop: '20%', marginLeft: '40%' }}>
-            <ProgressBar type="circular" mode="indeterminate" />
+            <CircularProgress size={100} />
           </div>
         ) : (
           items

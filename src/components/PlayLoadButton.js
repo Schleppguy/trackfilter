@@ -1,5 +1,15 @@
 import React from 'react';
-import Button from 'react-toolbox/lib/button/Button';
+
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import PlayIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  }
+});
 
 const PlayLoadButton = props => {
   const {
@@ -11,7 +21,8 @@ const PlayLoadButton = props => {
     track,
     playerTrack,
     currentVolume,
-    loadTrackToPlayer
+    loadTrackToPlayer,
+    classes
   } = props;
 
   const play = () => {
@@ -35,33 +46,38 @@ const PlayLoadButton = props => {
   if (context === 'player') {
     return (
       <Button
-        style={{ margin: '1em', marginLeft: '50%' }}
-        icon={isPlaying ? 'pause' : 'play_arrow'}
-        floating
-        accent
-        mini={context === 'player'}
+        style={{ margin: '1em 1em 1em 50%' }}
+        variant="fab"
+        aria-label={isPlaying ? 'pause' : 'play'}
         onClick={play}
         disabled={disabled}
-      />
+        mini
+        color="secondary"
+      >
+        {isPlaying ? <PauseIcon /> : <PlayIcon />}
+      </Button>
     );
   } else {
     let iconVal;
     if (isPlaying && playerTrack && playerTrack.id === track.id) {
-      iconVal = 'pause';
+      iconVal = <PauseIcon />;
     } else {
-      iconVal = 'play_arrow';
+      iconVal = <PlayIcon />;
     }
     return (
       <Button
         style={{ marginLeft: '1em' }}
-        icon={iconVal}
-        floating
-        accent
-        mini
+        variant="fab"
+        aria-label={isPlaying ? 'pause' : 'play'}
         onClick={play}
-      />
+        disabled={disabled}
+        mini
+        color="secondary"
+      >
+        {iconVal}
+      </Button>
     );
   }
 };
 
-export default PlayLoadButton;
+export default withStyles(styles)(PlayLoadButton);

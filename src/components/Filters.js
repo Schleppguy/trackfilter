@@ -25,7 +25,7 @@ const Filters = props => {
         display: 'flex',
         flexDirection: 'column',
         padding: '1.8rem',
-        marginTop: '2.5em',
+        marginTop: '3em',
         marginBottom: '2.5em',
         height: '85%',
         justifyContent: 'space-between'
@@ -37,7 +37,7 @@ const Filters = props => {
           flexDirection: 'column'
         }}
       >
-        <Typography variant="headline" gutterBottom>
+        <Typography variant="headline" color="textSecondary" gutterBottom>
           Filters
         </Typography>
         <Divider className={classes.divider} />

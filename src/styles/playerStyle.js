@@ -18,14 +18,12 @@ export default {
   },
   controls: {
     display: 'flex',
-    alignItems: 'baseline',
-    justifyContent: 'space-between'
-    // paddingBottom: '0.5em'
+    justifyContent: 'space-between',
+    marginRight: '1em'
   },
   volume: {
     display: 'flex',
-    width: '25%',
-    alignItems: 'baseline',
-    marginRight: '2em'
+    flexGrow: 1,
+    marginRight: '1em'
   }
 };
