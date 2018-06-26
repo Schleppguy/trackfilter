@@ -1,85 +1,93 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import AppBar from 'react-toolbox/lib/app_bar/AppBar';
-import Panel from 'react-toolbox/lib/layout/Panel';
-import Layout from 'react-toolbox/lib/layout/Layout';
-import NavDrawer from 'react-toolbox/lib/layout/NavDrawer';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+import FilterIcon from '@material-ui/icons/FilterList';
 
 import TrackList from '../containers/TrackList';
 import SCPlayer from '../containers/SCPlayer';
 import ClientFilters from '../containers/ClientFilters';
+import primaryLayoutStyles from '../styles/primaryLayoutStyles';
 
 class PrimaryLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      drawerActive: false,
-      drawerPinned: window.innerWidth > 900
+      mobileOpen: false
     };
-    this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
 
-  handleResize() {
-    this.setState({ drawerPinned: window.innerWidth > 900 });
-  }
-
-  toggleDrawerActive() {
-    this.setState({ drawerActive: !this.state.drawerActive });
-  }
-
-  componentDidMount() {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize.bind(this));
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize.bind(this));
-  }
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <Layout>
-          <NavDrawer
-            active={this.state.drawerActive}
-            pinned={this.state.drawerPinned}
-            onOverlayClick={this.toggleDrawerActive}
-            width="wide"
+      <div className={classes.root}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}
+            >
+              <FilterIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              TrackFilter
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor="left"
+            open={this.state.mobileOpen}
+            onClose={this.handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
           >
             <ClientFilters />
-          </NavDrawer>
-          <Panel bodyScroll={true}>
-            <AppBar
-              leftIcon={this.state.drawerPinned ? '' : 'filter_list'}
-              onLeftIconClick={this.toggleDrawerActive}
-              fixed
-              flat
-            >
-              <div
-                style={{
-                  fontSize: '1.5em',
-                  marginLeft: this.state.drawerPinned ? '50%' : '25%'
-                }}
-              >
-                <strong>TrackFilter</strong>
-              </div>
-            </AppBar>
-            <div
-              style={{
-                flex: 1,
-                padding: '1.8rem',
-                marginTop: '5em',
-                paddingBottom: '6em'
-              }}
-            >
-              <TrackList />
-            </div>
-            <SCPlayer />
-          </Panel>
-        </Layout>
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <ClientFilters />
+          </Drawer>
+        </Hidden>
+        <main className={classes.content}>
+          <TrackList />
+        </main>
+        <SCPlayer />
       </div>
     );
   }
 }
 
-export default PrimaryLayout;
+PrimaryLayout.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
+};
+
+export default withStyles(primaryLayoutStyles, { withTheme: true })(
+  PrimaryLayout
+);

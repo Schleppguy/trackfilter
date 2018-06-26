@@ -34,7 +34,7 @@ class TrackListItem extends React.Component {
       ? track.artwork_url
       : track.user.avatar_url;
     return (
-      <Card style={{ marginTop: '0.5em', width: '90%' }}>
+      <Card style={{ marginTop: '0.5em', maxWidth: '850px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div
             style={{

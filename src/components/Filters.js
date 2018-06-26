@@ -1,10 +1,17 @@
 import React from 'react';
+
+import Typography from '@material-ui/core/Typography';
+import withTheme from '@material-ui/core/styles/withTheme';
+import TextField from '@material-ui/core/TextField';
+
 import FilterByInput from './FilterByInput';
 import ArtistList from './ArtistList';
 import Duration from './Duration';
-import ListDivider from 'react-toolbox/lib/list/ListDivider';
 
 const Filters = props => {
+  const handleChange = action => event => {
+    action(event.target.value);
+  };
   return (
     <div
       style={{
@@ -23,7 +30,9 @@ const Filters = props => {
           flexDirection: 'column'
         }}
       >
-        <h3>Filters</h3>
+        <Typography variant="headline" gutterBottom>
+          Filters
+        </Typography>
         <div style={{ marginBottom: '1em' }}>
           <ArtistList
             followings={props.followingsList}
@@ -31,22 +40,27 @@ const Filters = props => {
             setMultipleArtistsFilter={props.setMultipleArtistsFilter}
             getMyFollowings={props.getMyFollowings}
           />
-          <ListDivider />
         </div>
-        <FilterByInput
+        <Typography variant="subheading">by Track Name</Typography>
+        <TextField
+          // className={classes.textField}
+          placeholder="Track Name"
+          value={props.filters.byTrackName}
+          onChange={handleChange(props.setTrackNameFilter)}
+          margin="normal"
+        />
+
+        {/* <FilterByInput
           value={props.filters.byTrackName}
           action={props.setTrackNameFilter}
-          label="By Track Name"
-        />
-        {/* <FilterByInput
-        value={props.filters.byArtistName}
-        action={props.setArtistNameFilter}
-        label="By Artist Name"
-      /> */}
-        <FilterByInput
+        /> */}
+        <Typography variant="subheading">by Genre</Typography>
+        <TextField
+          // className={classes.textField}
+          placeholder="Genre"
           value={props.filters.byGenre}
-          action={props.setGenreFilter}
-          label="By Genre"
+          onChange={handleChange(props.setGenreFilter)}
+          margin="normal"
         />
         <Duration setDurationFilter={props.setDurationFilter} />
       </div>
@@ -64,4 +78,4 @@ const Filters = props => {
   );
 };
 
-export default Filters;
+export default withTheme()(Filters);
