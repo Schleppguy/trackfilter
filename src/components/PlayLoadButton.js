@@ -21,8 +21,7 @@ const PlayLoadButton = props => {
     track,
     playerTrack,
     currentVolume,
-    loadTrackToPlayer,
-    classes
+    loadTrackToPlayer
   } = props;
 
   const play = () => {
