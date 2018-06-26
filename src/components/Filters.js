@@ -1,14 +1,21 @@
 import React from 'react';
 
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import withTheme from '@material-ui/core/styles/withTheme';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
 
-import FilterByInput from './FilterByInput';
 import ArtistList from './ArtistList';
 import Duration from './Duration';
 
+const styles = () => ({
+  divider: {
+    marginBottom: '2em'
+  }
+});
+
 const Filters = props => {
+  const { classes } = props;
   const handleChange = action => event => {
     action(event.target.value);
   };
@@ -33,36 +40,35 @@ const Filters = props => {
         <Typography variant="headline" gutterBottom>
           Filters
         </Typography>
-        <div style={{ marginBottom: '1em' }}>
-          <ArtistList
-            followings={props.followingsList}
-            cursor={props.cursor}
-            setMultipleArtistsFilter={props.setMultipleArtistsFilter}
-            getMyFollowings={props.getMyFollowings}
-          />
-        </div>
-        <Typography variant="subheading">by Track Name</Typography>
+        <Divider className={classes.divider} />
+        <ArtistList
+          followings={props.followingsList}
+          cursor={props.cursor}
+          setMultipleArtistsFilter={props.setMultipleArtistsFilter}
+          getMyFollowings={props.getMyFollowings}
+        />
+
+        <Divider className={classes.divider} />
+        <Typography variant="subheading" gutterBottom>
+          by Duration
+        </Typography>
+        <Duration setDurationFilter={props.setDurationFilter} />
+        <Divider className={classes.divider} />
+        <Typography variant="subheading" gutterBottom>
+          Text Filters
+        </Typography>
         <TextField
-          // className={classes.textField}
-          placeholder="Track Name"
+          placeholder="by Track Name"
           value={props.filters.byTrackName}
           onChange={handleChange(props.setTrackNameFilter)}
           margin="normal"
         />
-
-        {/* <FilterByInput
-          value={props.filters.byTrackName}
-          action={props.setTrackNameFilter}
-        /> */}
-        <Typography variant="subheading">by Genre</Typography>
         <TextField
-          // className={classes.textField}
-          placeholder="Genre"
+          placeholder="by Genre"
           value={props.filters.byGenre}
           onChange={handleChange(props.setGenreFilter)}
           margin="normal"
         />
-        <Duration setDurationFilter={props.setDurationFilter} />
       </div>
       <a
         href="https://www.soundcloud.com"
@@ -78,4 +84,4 @@ const Filters = props => {
   );
 };
 
-export default withTheme()(Filters);
+export default withStyles(styles)(Filters);

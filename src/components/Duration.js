@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { Typography } from '@material-ui/core';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -21,17 +22,24 @@ class Duration extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '2em' }}>
-        By Track Duration
+      <div>
         <Range
           max={360}
           defaultValue={[0, 360]}
           onChange={this.handleChange}
           style={{ marginTop: '1em' }}
         />
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <p>> {this.state.vals[0]} mins</p>
-          <p>{`< ${this.state.vals[1]} mins`}</p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '1em'
+          }}
+        >
+          <Typography variant="body2">> {this.state.vals[0]} mins</Typography>
+          <Typography variant="body2">{`< ${
+            this.state.vals[1]
+          } mins`}</Typography>
         </div>
       </div>
     );
