@@ -20,10 +20,6 @@ const styles = theme => ({
     maxWidth: 800,
     marginTop: '1em'
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
-  },
   actions: {
     display: 'flex'
   },
@@ -68,9 +64,6 @@ class TrackListItem extends React.Component {
 
   render() {
     const { track, classes } = this.props;
-    const artwork = track.artwork_url
-      ? track.artwork_url
-      : track.user.avatar_url;
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -78,9 +71,6 @@ class TrackListItem extends React.Component {
           avatar={
             <Avatar src={track.user.avatar_url} alt={track.user.username} />
           }
-          // action={
-          //   track.genre && <Chip label={track.genre} className={classes.chip} />
-          // }
           title={
             <a
               href={track.user.permalink_url}
@@ -101,14 +91,7 @@ class TrackListItem extends React.Component {
         />
 
         <div style={{ display: 'flex', width: '100%' }}>
-          <img
-            src={this.formatArtwork(artwork)}
-            style={{ height: '6em', width: '6em', marginLeft: '1em' }}
-            alt={`${track.user.username}: ${track.title}`}
-          />
-          <div style={{ width: '5em', marginTop: '0.5em' }}>
-            <PlayLoad track={track} context="feed" />
-          </div>
+          <PlayLoad track={track} context="feed" />
           <div
             style={{
               display: 'flex',

@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import MediaButton from './MediaButton';
 import Button from '@material-ui/core/Button';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  }
-});
 
 const PlayLoadButton = props => {
   const {
@@ -59,24 +53,14 @@ const PlayLoadButton = props => {
   } else {
     let iconVal;
     if (isPlaying && playerTrack && playerTrack.id === track.id) {
-      iconVal = <PauseIcon />;
+      iconVal = 'pause';
     } else {
-      iconVal = <PlayIcon />;
+      iconVal = 'play';
     }
     return (
-      <Button
-        style={{ marginLeft: '1em' }}
-        variant="fab"
-        aria-label={isPlaying ? 'pause' : 'play'}
-        onClick={play}
-        disabled={disabled}
-        mini
-        color="secondary"
-      >
-        {iconVal}
-      </Button>
+      <MediaButton track={track} iconVal={iconVal} play={play.bind(this)} />
     );
   }
 };
 
-export default withStyles(styles)(PlayLoadButton);
+export default PlayLoadButton;
