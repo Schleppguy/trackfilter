@@ -41,14 +41,15 @@ const Filters = props => {
           Filters
         </Typography>
         <Divider className={classes.divider} />
+        <Typography variant="subheading" gutterBottom>
+          by Artist
+        </Typography>
         <ArtistList
           followings={props.followingsList}
           cursor={props.cursor}
           setMultipleArtistsFilter={props.setMultipleArtistsFilter}
           getMyFollowings={props.getMyFollowings}
         />
-
-        <Divider className={classes.divider} />
         <Typography variant="subheading" gutterBottom>
           by Duration
         </Typography>

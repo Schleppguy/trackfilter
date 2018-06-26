@@ -1,22 +1,47 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import List from 'react-toolbox/lib/list/List';
-import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
-import Button from 'react-toolbox/lib/button/Button';
-import Dialog from 'react-toolbox/lib/dialog/Dialog';
-import ArtistListItem from './ArtistListItem';
+
+import { withStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import ListItemText from '@material-ui/core/ListItemText';
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginBottom: '2em'
+  },
+  input: {
+    width: '11.5em'
+  },
+  formControl: {
+    minWidth: 120,
+    maxWidth: 300
+  }
+});
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
 
 class ArtistList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dialogActive: false,
-      selectedArtists: []
+      selectedArtists: [],
+      name: []
     };
-    this.handleDialogToggle = this.handleDialogToggle.bind(this);
-    this.handleDialogApply = this.handleDialogApply.bind(this);
-    this.handleDialogClear = this.handleDialogClear.bind(this);
-    this.actions = this.actions.bind(this);
     this.updateSelectedArtists = this.updateSelectedArtists.bind(this);
   }
 
@@ -26,64 +51,41 @@ class ArtistList extends Component {
     }
   }
 
-  handleDialogToggle() {
-    this.setState({ dialogActive: !this.state.dialogActive });
-  }
-
-  handleDialogApply() {
-    this.props.setMultipleArtistsFilter(this.state.selectedArtists);
-    this.handleDialogToggle();
-  }
-
-  handleDialogClear() {
-    this.setState({ selectedArtists: [] });
-  }
-
-  updateSelectedArtists(artist) {
-    this.setState({
-      selectedArtists: this.state.selectedArtists.concat([artist])
-    });
-  }
-
-  actions() {
-    return [
-      { label: 'Cancel', onClick: this.handleDialogToggle },
-      { label: 'Clear Selections', onClick: this.handleDialogClear },
-      { label: 'Apply', onClick: this.handleDialogApply }
-    ];
+  updateSelectedArtists(event) {
+    this.setState({ selectedArtists: event.target.value });
+    this.props.setMultipleArtistsFilter(event.target.value);
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <Button
-          label="By Artist"
-          onClick={this.handleDialogToggle}
-          icon="launch"
-        />
-        <Dialog
-          actions={this.actions()}
-          active={this.state.dialogActive}
-          onEscKeyDown={this.handleDialogToggle}
-          onOverlayClick={this.handleDialogToggle}
-          title="Select 1 or More Artists"
-          type="small"
-        >
-          <div style={{ maxHeight: '20em', overflow: 'auto' }}>
-            <List selectable>
-              <ListSubHeader caption="Artists you follow" />
-              {this.props.followings.map((artist, idx) => {
-                return (
-                  <ArtistListItem
-                    artist={artist}
-                    updateSelectedArtists={this.updateSelectedArtists}
-                    key={idx}
-                  />
-                );
-              })}
-            </List>
-          </div>
-        </Dialog>
+      <div className={classes.root}>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="select-multiple-checkbox">
+            Select Multiple
+          </InputLabel>
+          <Select
+            multiple
+            value={this.state.selectedArtists}
+            onChange={this.updateSelectedArtists}
+            input={
+              <Input id="select-multiple-checkbox" className={classes.input} />
+            }
+            renderValue={selected => selected.join(', ')}
+            MenuProps={MenuProps}
+          >
+            {this.props.followings.map(artist => (
+              <MenuItem key={artist.username} value={artist.username}>
+                <Checkbox
+                  checked={
+                    this.state.selectedArtists.indexOf(artist.username) > -1
+                  }
+                />
+                <ListItemText primary={artist.username} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
     );
   }
@@ -94,4 +96,4 @@ ArtistList.propTypes = {
   followings: PropTypes.array
 };
 
-export default ArtistList;
+export default withStyles(styles)(ArtistList);

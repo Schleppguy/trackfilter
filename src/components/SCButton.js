@@ -3,12 +3,11 @@ import scButton from '../assets/btn-connect-sc-l.png';
 
 const SCButton = props => {
   return (
-    <button
-      onClick={props.startSession}
-      style={{ border: 'none', backgroundColor: 'white' }}
-    >
-      <img src={scButton} className="sc-button" alt="Connect with SoundCloud" />
-    </button>
+    <div>
+      <button onClick={props.startSession} style={{ border: 'none' }}>
+        <img src={scButton} alt="Connect with SoundCloud" />
+      </button>
+    </div>
   );
 };
 
