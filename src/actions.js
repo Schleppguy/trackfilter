@@ -59,6 +59,7 @@ export const startSession = () => {
   return dispatch => {
     scAuth()
       .then(session => {
+        console.log('session', session);
         dispatch(setOauthToken(session.oauth_token));
         dispatch(getNewTracks(null));
         dispatch(getMyFollowings(null));

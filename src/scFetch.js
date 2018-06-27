@@ -17,9 +17,7 @@ export const getCursor = nextHref => {
 export const scAuth = () => {
   return process.env.NODE_ENV === 'development'
     ? new Promise(resolve => resolve('development'))
-    : SC.connect().then(session => {
-        console.log(session);
-      });
+    : SC.connect();
 };
 
 export const scGetTracks = cursor => {
