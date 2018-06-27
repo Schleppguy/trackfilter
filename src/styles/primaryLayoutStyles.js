@@ -33,6 +33,9 @@ const primaryLayoutStyles = theme => ({
     marginTop: '3.5em',
     paddingBottom: '6em'
   },
+  brandText: {
+    color: theme.palette.common.white
+  },
   toolbar: theme.mixins.toolbar
 });
 

@@ -42,7 +42,7 @@ class PrimaryLayout extends Component {
             >
               <FilterIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography className={classes.brandText} variant="headline" noWrap>
               TrackFilter
             </Typography>
           </Toolbar>
