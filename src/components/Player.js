@@ -3,16 +3,25 @@ import React from 'react';
 import TrackTime from '../containers/TrackTime';
 import PlayLoad from '../containers/PlayLoad';
 
+import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import VolumeIcon from '@material-ui/icons/VolumeUp';
 import MuteIcon from '@material-ui/icons/VolumeOff';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+
 import playerStyles from '../styles/playerStyles';
 import { Typography } from '@material-ui/core';
 
 const Player = props => {
-  const { track, currentVolume, audio, updateVolume, lastVolume } = props;
+  const {
+    track,
+    currentVolume,
+    audio,
+    updateVolume,
+    lastVolume,
+    classes
+  } = props;
   const disabled = audio ? false : true;
 
   const handleVolumeChange = v => {
@@ -28,18 +37,10 @@ const Player = props => {
     <div style={{ display: 'flex' }}>
       <img
         src={track.artwork_url ? track.artwork_url : track.user.avatar_url}
-        style={playerStyles.artwork}
+        className={classes.artwork}
         alt={`${track.user.username}: ${track.title}`}
       />
-      <div
-        style={{
-          fontSize: 'small',
-          marginLeft: '1em',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around'
-        }}
-      >
+      <div className={classes.info}>
         <Typography variant="body1" color="textSecondary">
           {track.user.username}
         </Typography>
@@ -47,23 +48,23 @@ const Player = props => {
       </div>
     </div>
   ) : (
-    <div style={{ height: '2em', paddingTop: '0.5em' }}>Player is empty</div>
+    <div className={classes.emptyText}>Player is empty</div>
   );
 
   return (
-    <div style={playerStyles.player}>
-      <div style={{ width: '10%' }}>
+    <div className={classes.player}>
+      <div className={classes.playLoad}>
         <PlayLoad context="player" disabled={disabled} />
       </div>
-      <div style={{ width: '90%', marginLeft: '2em' }}>
-        <div style={playerStyles.content}>
+      <div className={classes.contentAndControls}>
+        <div className={classes.content}>
           {trackInfo}
           <div>
-            <div style={playerStyles.controls}>
-              <div style={{ flexGrow: 2, marginTop: '1em' }}>
+            <div className={classes.controls}>
+              <div className={classes.trackTime}>
                 <TrackTime disabled={disabled} />
               </div>
-              <div style={playerStyles.volume}>
+              <div className={classes.volume}>
                 <IconButton
                   style={{ flexGrow: 1 }}
                   disabled={disabled}
@@ -88,4 +89,4 @@ const Player = props => {
   );
 };
 
-export default Player;
+export default withStyles(playerStyles)(Player);

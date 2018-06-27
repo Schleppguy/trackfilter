@@ -23,7 +23,14 @@ const trackListItemStyles = theme => ({
   avatar: {
     height: 30,
     width: 30
-  }
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: '1em',
+    marginRight: '1em'
+  },
+  titleLink: { textDecoration: 'none', color: 'black' }
 });
 
 export default trackListItemStyles;

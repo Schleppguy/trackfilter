@@ -64,22 +64,15 @@ class TrackListItem extends React.Component {
           }
         />
 
-        <div style={{ display: 'flex', width: '100%' }}>
+        <div class={{ display: 'flex', width: '100%' }}>
           <PlayLoad track={track} context="feed" />
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginLeft: '1em',
-              marginRight: '1em'
-            }}
-          >
+          <div className={classes.content}>
             <div>
               <a
                 href={track.permalink_url}
                 target="_blank"
                 rel="noopener"
-                style={{ textDecoration: 'none', color: 'black' }}
+                className={classes.titleLink}
               >
                 <Typography variant="title">{track.title}</Typography>
               </a>

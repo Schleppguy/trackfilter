@@ -1,4 +1,4 @@
-export default {
+const playerStyles = theme => ({
   player: {
     display: 'flex',
     left: 0,
@@ -25,5 +25,17 @@ export default {
     display: 'flex',
     flexGrow: 1,
     marginRight: '1em'
-  }
-};
+  },
+  info: {
+    marginLeft: '1em',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  emptyText: { height: '2em', paddingTop: '0.5em' },
+  playLoad: { width: '10%' },
+  contentAndControls: { width: '90%', marginLeft: '2em' },
+  trackTime: { flexGrow: 2, marginTop: '1em' }
+});
+
+export default playerStyles;

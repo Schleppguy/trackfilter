@@ -1,9 +1,17 @@
 const homeStyles = theme => ({
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: 'white',
+    minHeight: 800
+  },
   heroBox: {
     height: '12em',
     width: '100%',
     [theme.breakpoints.down('xs')]: {
-      // width: '8em !important', // Overrides inline-style
       height: '8em'
     },
     backgroundColor: theme.palette.primary.main
@@ -14,7 +22,6 @@ const homeStyles = theme => ({
     overflow: 'hidden',
     opacity: 1,
     [theme.breakpoints.down('xs')]: {
-      // width: '8em !important', // Overrides inline-style
       width: 250,
       marginTop: '2em'
     }

@@ -10,17 +10,7 @@ import homeStyles from '../styles/homeStyles';
 const Home = props => {
   const { classes } = props;
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        alignItems: 'center',
-        textAlign: 'center',
-        backgroundColor: 'white',
-        minHeight: 800
-      }}
-    >
+    <div className={classes.main}>
       <div className={classes.heroBox}>
         <img className={classes.heroImg} src={logo} alt="TrackFilter Logo" />
       </div>

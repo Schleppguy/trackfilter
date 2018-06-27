@@ -16,23 +16,8 @@ const Filters = props => {
     action(event.target.value);
   };
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '1.8rem',
-        marginTop: '3em',
-        marginBottom: '2.5em',
-        height: '85%',
-        justifyContent: 'space-between'
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
+    <div className={classes.main}>
+      <div className={classes.list}>
         <Typography variant="headline" color="textSecondary" gutterBottom>
           Filters
         </Typography>
