@@ -4,17 +4,18 @@ import {
   setArtistNameFilter,
   setGenreFilter,
   setMultipleArtistsFilter,
-  setDurationFilter
+  setDurationFilter,
+  setOauthToken
 } from '../actions';
 
 export const defaultState = {
   filters: {
     byTrackName: '',
-    // byArtistName: '',
     byGenre: '',
     byMultipleArtists: [],
     byDuration: [0, 120]
-  }
+  },
+  oauthToken: null
 };
 
 const client = handleActions(
@@ -38,6 +39,10 @@ const client = handleActions(
     [setDurationFilter]: (state, { payload }) => ({
       ...state,
       filters: { ...state.filters, byDuration: payload }
+    }),
+    [setOauthToken]: (state, { payload }) => ({
+      ...state,
+      oauthToken: payload
     })
   },
   defaultState

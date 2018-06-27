@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { startSession, getNewTracks } from '../actions';
+import { getNewTracks } from '../actions';
 import ViewableTrackList from '../components/ViewableTrackList';
 import _ from 'lodash';
 
@@ -14,12 +14,6 @@ export const filterByTrackName = (track, filters) => {
     ? true
     : isIncluded(track.title, filters.byTrackName);
 };
-
-// export const filterByArtistName = (track, filters) => {
-//   return filters.byArtistName === ''
-//     ? true
-//     : isIncluded(track.user.username, filters.byArtistName);
-// };
 
 export const filterByGenre = (track, filters) => {
   return filters.byGenre === ''
@@ -65,7 +59,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startSession: () => dispatch(startSession()),
     getNewTracks: cursor => dispatch(getNewTracks(cursor))
   };
 };

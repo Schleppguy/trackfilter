@@ -31,7 +31,7 @@ const primaryLayoutStyles = theme => ({
       marginLeft: `${drawerWidth}px`
     },
     minHeight: 750,
-    marginTop: '3.5em',
+    marginTop: '2.5em',
     paddingBottom: '6em'
   },
   brandText: {

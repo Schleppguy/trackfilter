@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TrackListItem from './TrackListItem';
-import SCButton from './SCButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class ViewableTrackList extends Component {
@@ -21,7 +20,6 @@ class ViewableTrackList extends Component {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <SCButton startSession={startSession} />
         {loading ? (
           <div style={{ marginTop: '20%', marginLeft: '40%' }}>
             <CircularProgress size={100} />

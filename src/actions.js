@@ -22,6 +22,9 @@ export const setMultipleArtistsFilter = createAction(
 );
 export const setDurationFilter = createAction('SET_DURATION_FILTER');
 
+//session
+export const setOauthToken = createAction('SET_OAUTH_TOKEN');
+
 //Player
 export const loadTrack = createAction('LOAD_TRACK');
 export const trackLoaded = createAction('TRACK_LOADED');
@@ -56,6 +59,7 @@ export const startSession = () => {
   return dispatch => {
     scAuth()
       .then(session => {
+        dispatch(setOauthToken(session.oauth_token));
         dispatch(getNewTracks(null));
         dispatch(getMyFollowings(null));
       })
