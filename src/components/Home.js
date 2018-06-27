@@ -4,26 +4,38 @@ import SCButton from './SCButton';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-import logo from '../assets/primary-logo-large.png';
+import logo from '../assets/white-logo-transparent-large.png';
 
 const styles = theme => ({
   heroBox: {
-    height: 300,
+    height: '12em',
+    width: '100%',
     [theme.breakpoints.down('xs')]: {
       // width: '8em !important', // Overrides inline-style
-      height: 200
-    }
+      height: '8em'
+    },
+    backgroundColor: theme.palette.primary.main
   },
   heroImg: {
-    height: 400,
+    width: 400,
+    marginTop: '3em',
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
       // width: '8em !important', // Overrides inline-style
-      height: 250
+      width: 250,
+      marginTop: '2em'
     }
   },
   button: {
-    marginTop: '3em'
+    marginTop: '2em'
+  },
+  headline: {
+    color: theme.palette.primary.dark,
+    margin: '1em'
+    // [theme.breakpoints.down('xs')]: {
+    //   // width: '8em !important', // Overrides inline-style
+    //   fontSize: 'medium'
+    // }
   }
 });
 
@@ -42,7 +54,7 @@ const Home = props => {
       <div className={classes.heroBox}>
         <img className={classes.heroImg} src={logo} alt="TrackFilter Logo" />
       </div>
-      <Typography variant="display1" color="primary">
+      <Typography className={classes.headline} variant="display1">
         Stop scrolling and start listening
       </Typography>
       <div className={classes.button}>

@@ -14,7 +14,7 @@ import TrackList from '../containers/TrackList';
 import SCPlayer from '../containers/SCPlayer';
 import ClientFilters from '../containers/ClientFilters';
 import primaryLayoutStyles from '../styles/primaryLayoutStyles';
-// import logo from '../assets/white-logo-medium.png';
+import logo from '../assets/white-logo-transparent-large.png';
 
 class PrimaryLayout extends Component {
   constructor(props) {
@@ -43,14 +43,7 @@ class PrimaryLayout extends Component {
             >
               <FilterIcon />
             </IconButton>
-            <Typography className={classes.brandText} variant="headline" noWrap>
-              TrackFilter
-            </Typography>
-            {/* <img
-              src={logo}
-              alt="TrackFilter Logo"
-              style={{ height: 80, padding: -40 }}
-            /> */}
+            <img className={classes.logo} src={logo} alt="TrackFilter Logo" />
           </Toolbar>
         </AppBar>
         <Hidden mdUp>
