@@ -20,6 +20,7 @@ const styles = theme => ({
     width: 400,
     marginTop: '3em',
     overflow: 'hidden',
+    opacity: 1,
     [theme.breakpoints.down('xs')]: {
       // width: '8em !important', // Overrides inline-style
       width: 250,
@@ -32,10 +33,6 @@ const styles = theme => ({
   headline: {
     color: theme.palette.primary.dark,
     margin: '1em'
-    // [theme.breakpoints.down('xs')]: {
-    //   // width: '8em !important', // Overrides inline-style
-    //   fontSize: 'medium'
-    // }
   }
 });
 
@@ -48,7 +45,9 @@ const Home = props => {
         flexDirection: 'column',
         width: '100%',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: 'white',
+        minHeight: 800
       }}
     >
       <div className={classes.heroBox}>
