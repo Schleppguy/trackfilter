@@ -8,7 +8,7 @@ import VolumeIcon from '@material-ui/icons/VolumeUp';
 import MuteIcon from '@material-ui/icons/VolumeOff';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import playerStyle from '../styles/playerStyle';
+import playerStyles from '../styles/playerStyles';
 import { Typography } from '@material-ui/core';
 
 const Player = props => {
@@ -28,7 +28,7 @@ const Player = props => {
     <div style={{ display: 'flex' }}>
       <img
         src={track.artwork_url ? track.artwork_url : track.user.avatar_url}
-        style={playerStyle.artwork}
+        style={playerStyles.artwork}
         alt={`${track.user.username}: ${track.title}`}
       />
       <div
@@ -51,19 +51,19 @@ const Player = props => {
   );
 
   return (
-    <div style={playerStyle.player}>
+    <div style={playerStyles.player}>
       <div style={{ width: '10%' }}>
         <PlayLoad context="player" disabled={disabled} />
       </div>
       <div style={{ width: '90%', marginLeft: '2em' }}>
-        <div style={playerStyle.content}>
+        <div style={playerStyles.content}>
           {trackInfo}
           <div>
-            <div style={playerStyle.controls}>
+            <div style={playerStyles.controls}>
               <div style={{ flexGrow: 2, marginTop: '1em' }}>
                 <TrackTime disabled={disabled} />
               </div>
-              <div style={playerStyle.volume}>
+              <div style={playerStyles.volume}>
                 <IconButton
                   style={{ flexGrow: 1 }}
                   disabled={disabled}

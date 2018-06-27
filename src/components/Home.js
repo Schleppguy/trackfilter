@@ -5,36 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 import logo from '../assets/white-logo-transparent-large.png';
-
-const styles = theme => ({
-  heroBox: {
-    height: '12em',
-    width: '100%',
-    [theme.breakpoints.down('xs')]: {
-      // width: '8em !important', // Overrides inline-style
-      height: '8em'
-    },
-    backgroundColor: theme.palette.primary.main
-  },
-  heroImg: {
-    width: 400,
-    marginTop: '3em',
-    overflow: 'hidden',
-    opacity: 1,
-    [theme.breakpoints.down('xs')]: {
-      // width: '8em !important', // Overrides inline-style
-      width: 250,
-      marginTop: '2em'
-    }
-  },
-  button: {
-    marginTop: '2em'
-  },
-  headline: {
-    color: theme.palette.primary.dark,
-    margin: '1em'
-  }
-});
+import homeStyles from '../styles/homeStyles';
 
 const Home = props => {
   const { classes } = props;
@@ -63,4 +34,4 @@ const Home = props => {
   );
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(homeStyles)(Home);

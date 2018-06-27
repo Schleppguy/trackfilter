@@ -9,21 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
+import artistListStyles from '../styles/artistListStyles';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginBottom: '2em'
-  },
-  input: {
-    width: '11.5em'
-  },
-  formControl: {
-    minWidth: 120,
-    maxWidth: 300
-  }
-});
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -96,4 +83,4 @@ ArtistList.propTypes = {
   followings: PropTypes.array
 };
 
-export default withStyles(styles)(ArtistList);
+export default withStyles(artistListStyles)(ArtistList);

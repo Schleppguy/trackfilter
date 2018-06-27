@@ -8,11 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import ArtistList from './ArtistList';
 import Duration from './Duration';
 
-const styles = () => ({
-  divider: {
-    marginBottom: '2em'
-  }
-});
+import filtersStyles from '../styles/filtersStyles';
 
 const Filters = props => {
   const { classes } = props;
@@ -85,4 +81,4 @@ const Filters = props => {
   );
 };
 
-export default withStyles(styles)(Filters);
+export default withStyles(filtersStyles)(Filters);

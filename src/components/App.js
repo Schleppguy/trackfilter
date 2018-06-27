@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import PrimaryLayout from './PrimaryLayout';
@@ -18,24 +18,19 @@ const theme = createMuiTheme({
   }
 });
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <MuiThemeProvider theme={theme}>
-          {this.props.oauthToken === null ? (
-            <Home startSession={this.props.startSession} />
-          ) : (
-            <PrimaryLayout />
-          )}
-        </MuiThemeProvider>
-      </React.Fragment>
-    );
-  }
-}
+const App = props => {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <MuiThemeProvider theme={theme}>
+        {props.oauthToken === null ? (
+          <Home startSession={props.startSession} />
+        ) : (
+          <PrimaryLayout />
+        )}
+      </MuiThemeProvider>
+    </React.Fragment>
+  );
+};
 
 export default App;

@@ -15,33 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const styles = theme => ({
-  card: {
-    maxWidth: 800,
-    marginTop: '1em'
-  },
-  actions: {
-    display: 'flex'
-  },
-  actionButton: {
-    height: 20,
-    width: 20
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    }),
-    marginLeft: 'auto'
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
-  avatar: {
-    height: 30,
-    width: 30
-  }
-});
+import trackListItemStyles from '../styles/trackListItemStyles';
 
 class TrackListItem extends React.Component {
   constructor(props) {
@@ -145,4 +119,4 @@ class TrackListItem extends React.Component {
   }
 }
 
-export default withStyles(styles)(TrackListItem);
+export default withStyles(trackListItemStyles)(TrackListItem);

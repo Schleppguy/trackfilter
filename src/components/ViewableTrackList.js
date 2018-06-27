@@ -13,7 +13,7 @@ class ViewableTrackList extends Component {
     }
   }
   render() {
-    const { viewableTrackList, startSession, loading } = this.props;
+    const { viewableTrackList, loading } = this.props;
     const items = viewableTrackList.map((track, i) => {
       return <TrackListItem track={track} key={i} />;
     });
