@@ -30,6 +30,7 @@ const primaryLayoutStyles = theme => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: `${drawerWidth}px`
     },
+    minHeight: 750,
     marginTop: '3.5em',
     paddingBottom: '6em'
   },
