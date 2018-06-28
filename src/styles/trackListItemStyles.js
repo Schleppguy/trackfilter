@@ -24,12 +24,13 @@ const trackListItemStyles = theme => ({
     height: 30,
     width: 30
   },
-  content: {
+  info: {
     display: 'flex',
     flexDirection: 'column',
     marginLeft: '1em',
     marginRight: '1em'
   },
+  content: { display: 'flex', width: '100%' },
   titleLink: { textDecoration: 'none', color: 'black' }
 });
 

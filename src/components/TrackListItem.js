@@ -64,9 +64,9 @@ class TrackListItem extends React.Component {
           }
         />
 
-        <div class={{ display: 'flex', width: '100%' }}>
+        <div className={classes.content}>
           <PlayLoad track={track} context="feed" />
-          <div className={classes.content}>
+          <div className={classes.info}>
             <div>
               <a
                 href={track.permalink_url}
